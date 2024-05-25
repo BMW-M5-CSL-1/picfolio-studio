@@ -14,10 +14,11 @@
         <div class="app-brand demo">
             <a href="{{ route('dashboard') }}" class="app-brand-link">
                 <span class="brand-logo">
-                    <img class="img-fluid justicon" src="{{ asset('assets/img/branding/LOGO.svg') }}" />
+                    <img class="img-fluid justicon" src="{{ asset('assets/img/branding/pic_logo.jpg') }}" width="50" />
                 </span>
                 {{-- <h5 class="brand-text mt-3 ms-2">{{ env('APP_NAME') }}</h5> --}}
-                <img class="img-fluid custom_side_icon" src="{{ asset('assets/img/branding/LOGO.svg') }}" />
+                <img class="img-fluid custom_side_icon" src="{{ asset('assets/img/branding/pic_logo.jpg') }}"
+                    width="25" />
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

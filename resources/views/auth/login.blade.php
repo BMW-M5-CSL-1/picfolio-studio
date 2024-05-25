@@ -35,8 +35,8 @@
                 <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
                     {{-- <img src="{{ asset('assets/img/illustrations/login_illustration.svg') }}"
                         alt="auth-login-cover" class="img-fluid my-5 auth-illustration"> --}}
-                        <img src="{{ asset('assets/img/branding/LOGO.svg') }}" width="1000"
-                        alt="auth-login-cover" class="img-fluid my-5 auth-illustration">
+                        <img src="{{ asset('assets/img/branding/pic_logo.jpg') }}" width="1000"
+                        alt="auth-login-cover" class="img-fluid my-5 auth-illustration rounded">
                     {{-- <img src="{{ asset('assets/img/illustrations/auth-login-illustration-' . $configData['style'] . '.png') }}"
                         alt="auth-login-cover" class="img-fluid my-5 auth-illustration"
                         data-app-light-img="illustrations/auth-login-illustration-light.png"

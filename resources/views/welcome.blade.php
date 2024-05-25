@@ -99,7 +99,7 @@
                     </button>
                     <!-- Mobile menu toggle: End-->
                     <a href="{{ url('/') }}" class="app-brand-link">
-                        <img class="img-fluid justicon rounded" width="60"
+                        <img class="img-fluid justicon rounded" width="40"
                             src="{{ asset('assets/img/branding/pic_logo.jpg') }}" alt="PicFolio Studio" />
                         <span class="app-brand-logo demo">
                         </span>
@@ -127,217 +127,135 @@
                         <li class="nav-item">
                             <a class="nav-link fw-medium" href="#landingContact">Contact us</a>
                         </li>
-                        {{-- <li class="nav-item mega-dropdown">
+                        <li class="nav-item mega-dropdown">
                             <a href="javascript:void(0);"
                                 class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium"
                                 aria-expanded="false" data-bs-toggle="mega-dropdown" data-trigger="hover">
-                                <span data-i18n="Pages">Pages</span>
+                                <span data-i18n="Pages">Shoots</span>
                             </a>
                             <div class="dropdown-menu p-4">
                                 <div class="row gy-4">
                                     <div class="col-12 col-lg">
                                         <div class="h6 d-flex align-items-center mb-2 mb-lg-3">
-                                            <div class="avatar avatar-sm flex-shrink-0 me-2">
-                                                <span class="avatar-initial rounded bg-label-primary"><i
-                                                        class='ti ti-layout-grid'></i></span>
-                                            </div>
-                                            <span class="ps-1">Other</span>
+                                            <span class="ps-1">Wedding</span>
                                         </div>
                                         <ul class="nav flex-column">
+
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="pricing-page.html">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    <span data-i18n="Pricing">Pricing</span>
+                                                    <span data-i18n="Pricing">Pre Wedding</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="payment-page.html">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    <span data-i18n="Payment">Payment</span>
+                                                    <span data-i18n="Payment">Mendhi</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="checkout-page.html">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    <span data-i18n="Checkout">Checkout</span>
+                                                    <span data-i18n="Checkout">Barat</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="help-center-landing.html">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    <span data-i18n="Help Center">Help Center</span>
+                                                    <span data-i18n="Help Center">Walima</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-12 col-lg">
                                         <div class="h6 d-flex align-items-center mb-2 mb-lg-3">
-                                            <div class="avatar avatar-sm flex-shrink-0 me-2">
-                                                <span class="avatar-initial rounded bg-label-primary"><i
-                                                        class='ti ti-lock-open'></i></span>
-                                            </div>
-                                            <span class="ps-1">Auth Demo</span>
+                                            <span class="ps-1">Occassion</span>
                                         </div>
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-login-basic.html"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Login (Basic)
+                                                    <span data-i18n="Pricing">Insta Shoot</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-login-cover.html"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Login (Cover)
+                                                    <span data-i18n="Payment">Vloging</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-register-basic.html"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Register (Basic)
+                                                    <span data-i18n="Checkout">Party Shoot</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-register-cover.html"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Register (Cover)
+                                                    <span data-i18n="Help Center">Baby & Kids</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-register-multisteps.html"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link" href="#">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Register (Multi-steps)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-forgot-password-basic.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Forgot Password (Basic)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-forgot-password-cover.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Forgot Password (Cover)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-reset-password-basic.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Reset Password (Basic)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-reset-password-cover.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Reset Password (Cover)
+                                                    <span data-i18n="Help Center">Vocation</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-12 col-lg">
                                         <div class="h6 d-flex align-items-center mb-2 mb-lg-3">
-                                            <div class="avatar avatar-sm flex-shrink-0 me-2">
-                                                <span class="avatar-initial rounded bg-label-primary"><i
-                                                        class='ti ti-file-analytics'></i></span>
-                                            </div>
-                                            <span class="ps-1">Other</span>
+                                            <span class="ps-1">Business</span>
                                         </div>
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/pages-misc-error.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Error
+                                                    Food
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/pages-misc-under-maintenance.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Under Maintenance
+                                                    Interior
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/pages-misc-comingsoon.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Coming Soon
+                                                    Product Shoot
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/pages-misc-not-authorized.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Not Authorized
+                                                    Corporate Events
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-verify-email-basic.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Verify Email (Basic)
+                                                    Brand Video
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-verify-email-cover.html"
+                                                <a class="nav-link mega-dropdown-link" href="#"
                                                     target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
-                                                    Verify Email (Cover)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-two-steps-basic.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Two Steps (Basic)
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link"
-                                                    href="../vertical-menu-template/auth-two-steps-cover.html"
-                                                    target="_blank">
-                                                    <i class='ti ti-circle me-1'></i>
-                                                    Two Steps (Cover)
+                                                    Profile & Headshot
                                                 </a>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <div class="col-lg-4 d-none d-lg-block">
-                                        <div class="bg-body nav-img-col p-2">
-                                            <img src="{{ asset('assets/img/front-pages/misc/nav-item-col-img.png') }}"
-                                                alt="nav item col image" class="w-100">
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link fw-medium" href="{{ asset('vertical-menu-template/index.html') }}"
                                 target="_blank">Admin</a>
@@ -963,7 +881,8 @@
                                 <div id="accordionFour" class="accordion-collapse collapse"
                                     aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        PicFolio Studio cost a fraction of a cost of a billboard and comes with trackable
+                                        PicFolio Studio cost a fraction of a cost of a billboard and comes with
+                                        trackable
                                         analytics to know its working.
                                     </div>
                                 </div>
@@ -1104,7 +1023,7 @@
                 <div class="row gx-0 gy-4 g-md-5">
                     <div class="col-lg-5">
                         <a href="{{ url('/') }}" class="app-brand-link mb-4">
-                            <img class="img-fluid justicon rounded" width="60"
+                            <img class="img-fluid justicon rounded" width="40"
                                 src="{{ asset('assets/img/branding/pic_logo.jpg') }}" alt="PicFolio Studio" />
                             {{-- <span class="app-brand-text demo footer-link fw-bold ms-2 ps-1">PicFolio Studio</span> --}}
                         </a>
