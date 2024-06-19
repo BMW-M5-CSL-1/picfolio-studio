@@ -117,101 +117,6 @@
 @endcan
 {{-- @endcanany --}}
 
-
-{{-- @if (Auth::user()->can('permissions.index') || Auth::user()->can('roles.index'))
-    <li class="menu-header">
-      <span class="menu-header-text">Payments</span>
-    </li>
-@endif
-
-@canany([])
-<li class="menu-item ">
-    <a class="menu-link menu-toggle " href="javascript:void(0)">
-        <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-file-dollar"
-            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-            fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
-            <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5"></path>
-            <path d="M12 17v1m0 -8v1"></path>
-        </svg>
-        <span class="menu-title text-truncate">Invoices
-        </span>
-    </a>
-    <ul class="menu-sub">
-        @can('roles.index')
-            <li class="menu-item ">
-                <a class="menu-link" href="#">
-                    <span class="menu-title text-truncate">List</span>
-                </a>
-            </li>
-        @endcan
-
-        @can('permissions.index')
-            <li class="menu-item ">
-                <a class="menu-link" href="#">
-                    <span class="menu-title text-truncate">View</span>
-                </a>
-            </li>
-        @endcan
-        @can('roles.index')
-            <li class="menu-item ">
-                <a class="menu-link" href="#">
-                    <span class="menu-title text-truncate">Add</span>
-                </a>
-            </li>
-        @endcan
-
-        @can('permissions.index')
-            <li class="menu-item ">
-                <a class="menu-link" href="#">
-                    <span class="menu-title text-truncate">Edit</span>
-                </a>
-            </li>
-        @endcan
-    </ul>
-</li>
-@endcanany --}}
-
-{{-- @canany(['sites.settings.communication-channels.index']) --}}
-{{-- <li class="menu-header">
-    <span data-i18n="Others">Communication Channels</span>
-</li> --}}
-{{-- @endcanany --}}
-
-{{-- @can('roles.index') --}}
-{{-- <li class="menu-item ">
-    <a class="menu-link" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-mail" width="24"
-            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
-            <path d="M3 7l9 6l9 -6"></path>
-        </svg>
-        <span class="menu-title text-truncate">Email
-        </span>
-    </a>
-</li> --}}
-{{-- @endcan --}}
-
-{{-- @can('roles.index') --}}
-{{-- <li class="menu-item ">
-    <a class="menu-link" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-messages"
-            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-            fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
-            <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
-        </svg>
-        <span class="menu-title text-truncate">Chat
-        </span>
-    </a>
-</li> --}}
-{{-- @endcan --}}
-
 {{-- Chat --}}
 @canany(['chat.index', 'profile.index'])
     <li class="menu-header">
@@ -235,7 +140,6 @@
         </a>
     </li>
 @endcan
-
 
 @can('profile.index')
     <li class="menu-item {{ request()->routeIs('profile.index') ? 'active' : null }}">

@@ -78,50 +78,11 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         });
     });
 
-    // Paper Types
-    Route::group(['prefix' => 'paper-type', 'as' => 'paper-type.'], function () {
-    });
-
-    // Papr Quality
-    Route::group(['prefix' => 'paper-quality', 'as' => 'paper-quality.'], function () {
-    });
-
-    // Location
-    Route::group(['prefix' => 'location', 'as' => 'location.'], function () {
-    });
-
-    // Route
-    Route::group(['prefix' => 'route', 'as' => 'route.'], function () {
-    });
-
-    // Design
-    Route::group(['prefix' => 'design', 'as' => 'design.'], function () {
-    });
-
     // Order
     Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
 
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
         });
-
-        // Route for PDFs
-    });
-
-
-    // Printing routes
-    Route::group(['prefix' => 'printing-press', 'as' => 'printing-press.'], function () {
-    });
-
-    // Distributor Routes
-    Route::group(['prefix' => 'distributor', 'as' => 'distributor.'], function () {
-    });
-
-    // Vehicle Media routes
-    Route::group(['prefix' => 'vehicle-media', 'as' => 'vehicle-media.'], function () {
-    });
-
-    // Reports
-    Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
