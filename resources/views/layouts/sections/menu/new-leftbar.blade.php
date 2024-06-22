@@ -119,7 +119,7 @@
 
 {{-- @canany(['location.index', 'route.index', 'paper-type.index', 'paper-quality.index', 'design.index', 'orders.index', 'orders.create', 'orders.show', 'printing-press.index', 'distributor.index', 'vehicle-media.index']) --}}
 <li class="menu-header">
-    <span data-i18n="Management">Management</span>
+    <span data-i18n="Marketplace">Marketplace</span>
 </li>
 {{-- @endcanany --}}
 

@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
         });
     });

@@ -49,60 +49,68 @@
 
 @section('content')
 
-<div class="card">
-    <div class="card-body">
-        <div class="card-datatable table-responsive">
-            <table class="datatables-orders table border-top">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Order No</th>
-                        <th>User</th>
-                        <th>Photographer</th>
-                        <th class="w-px-200">Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1001</td>
-                        <td>John Doe</td>
-                        <td>Jane Smith</td>
-                        <td><span class="badge badge-success">Completed</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">View</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1002</td>
-                        <td>Mary Johnson</td>
-                        <td>Mike Brown</td>
-                        <td><span class="badge badge-warning">Pending</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">View</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>1003</td>
-                        <td>James Williams</td>
-                        <td>Sarah Davis</td>
-                        <td><span class="badge badge-danger">Cancelled</span></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm">View</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="card">
+        <div class="card-header header-elements">
+            {{-- <span class=" me-2">Card Header</span> --}}
 
+            <div class="card-header-elements ms-auto">
+                <a href="{{ route('booking.create') }}" type="button" class="btn btn-sm btn-primary"><span
+                        class="tf-icon ti ti-plus ti-sm me-1"></span>Create</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-datatable table-responsive">
+                <table class="datatables-orders table border-top">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order No</th>
+                            <th>User</th>
+                            <th>Photographer</th>
+                            <th class="w-px-200">Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>John Doe</td>
+                            <td>Jane Smith</td>
+                            <td><span class="badge badge-success">Completed</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>Mary Johnson</td>
+                            <td>Mike Brown</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1003</td>
+                            <td>James Williams</td>
+                            <td>Sarah Davis</td>
+                            <td><span class="badge badge-danger">Cancelled</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
-</div>
 
     {{-- <div class="row g-4 mb-4">
         <div class="col-sm-6 col-xl-3">
@@ -377,10 +385,10 @@
 
     {{-- <div class="card">
         <div class="card-body"> --}}
-            {{-- <form action="#" id="design_form" method="get"> --}}
-            {{-- {{ $dataTable->table() }} --}}
-            {{-- </form> --}}
-        {{-- </div>
+    {{-- <form action="#" id="design_form" method="get"> --}}
+    {{-- {{ $dataTable->table() }} --}}
+    {{-- </form> --}}
+    {{-- </div>
     </div> --}}
 
     {{-- Modal for Details --}}
