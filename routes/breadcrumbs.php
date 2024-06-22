@@ -68,6 +68,18 @@ Breadcrumbs::for('orders.show', function (BreadcrumbTrail $trail) {
     $trail->push('Preview');
 });
 
+// Gallery Breadcrumbs
+Breadcrumbs::for('gallery.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Gallery', route('gallery.index'));
+});
+
+Breadcrumbs::for('gallery.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Gallery');
+    $trail->push('Create', route('gallery.create'));
+});
+
 // Chat Breadcrumbs
 Breadcrumbs::for('chat.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

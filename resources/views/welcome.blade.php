@@ -142,25 +142,29 @@
                                         <ul class="nav flex-column">
 
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Pricing">Pre Wedding</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Payment">Mendhi</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Checkout">Barat</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Help Center">Walima</span>
                                                 </a>
@@ -173,31 +177,36 @@
                                         </div>
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Pricing">Insta Shoot</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Payment">Vloging</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Checkout">Party Shoot</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Help Center">Baby & Kids</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}">
                                                     <i class='ti ti-circle me-1'></i>
                                                     <span data-i18n="Help Center">Vocation</span>
                                                 </a>
@@ -210,43 +219,43 @@
                                         </div>
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Food
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Interior
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Product Shoot
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Corporate Events
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Brand Video
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mega-dropdown-link" href="#"
-                                                    target="_blank">
+                                                <a class="nav-link mega-dropdown-link"
+                                                    href="{{ route('booking.index') }}" target="_blank">
                                                     <i class='ti ti-circle me-1'></i>
                                                     Profile & Headshot
                                                 </a>

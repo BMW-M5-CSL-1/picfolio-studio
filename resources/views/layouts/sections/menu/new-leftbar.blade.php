@@ -125,13 +125,7 @@
 
 {{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
 <li class="menu-item
-    {{ request()->routeIs('booking.index')
-    // ||
-    // request()->routeIs('booking.create') ||
-    // request()->routeIs('booking.show') ||
-    // request()->routeIs('booking.edit')
-        ? 'active'
-        : null }}
+    {{ request()->routeIs('booking.*') ? 'active' : null }}
         ">
     <a class="menu-link" href="{{ route('booking.index') }}">
         <i class="icon menu-icon ti ti-shopping-cart"></i>
@@ -142,17 +136,12 @@
 {{-- @endcanany --}}
 
 <li class="menu-item
-    {{-- {{ request()->routeIs('orders.index') ||
-    request()->routeIs('orders.create') ||
-    request()->routeIs('orders.show') ||
-    request()->routeIs('orders.edit')
-        ? 'active'
-        : null }} --}}
+    {{ request()->routeIs('gallery.*') ? 'active' : null }}
         ">
-    <a class="menu-link" href="#">
+    <a class="menu-link" href="{{ route('gallery.index') }}">
         <i class="icon menu-icon ti ti-photo">
         </i>
-        <span class="menu-title text-truncate">Pictures
+        <span class="menu-title text-truncate">Gallery
         </span>
     </a>
 </li>

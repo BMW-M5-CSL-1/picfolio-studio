@@ -90,9 +90,25 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 });
 
 // Order
-Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
-    Route::get('/', [OrderController::class, 'index'])->name('index');
-    Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+        });
+    });
+
+    Route::group(['prefix' => 'gallery', 'as' => 'gallery.'], function () {
+        Route::get('/', function () {
+            return view('app.gallery.index');
+        })->name('index');
+        Route::get('create', function () {
+            return view('app.gallery.create');
+        })->name('create');
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+            Route::get('/details', function () {
+                return false;
+            })->name('details');
+        });
     });
 });
 
