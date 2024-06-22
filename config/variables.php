@@ -4,7 +4,7 @@ return [
     "creatorName" => "Pixinvent",
     "creatorUrl" => "https://pixinvent.com",
     "templateName" => "PicFolio Studio",
-    "templateSuffix" => "Marketing",
+    "templateSuffix" => "PicFolio",
     "templateVersion" => "1.0.0",
     "templateFree" => false,
     "templateDescription" => "Start your development with a Dashboard for Bootstrap 5",

@@ -101,8 +101,8 @@
         <a class="menu-link" href="{{ route('reports.index') }}">
             {{-- <i class="menu-icon tf-icons ti ti-smart-home"></i> --}}
             <svg xmlns="http://www.w3.org/2000/svg" class="icon menu-icon icon-tabler icon-tabler-checkup-list"
-                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
                 <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
@@ -118,7 +118,7 @@
 {{-- @endcanany --}}
 
 {{-- Chat --}}
-@canany(['chat.index', 'profile.index'])
+@canany(['chat.index', 'profile.index', 'profile.edit'])
     <li class="menu-header">
         <span class="menu-header-text">Pages</span>
     </li>
@@ -142,7 +142,8 @@
 @endcan
 
 @can('profile.index')
-    <li class="menu-item {{ request()->routeIs('profile.index') ? 'active' : null }}">
+    <li
+        class="menu-item {{ request()->routeIs('profile.index') || request()->routeIs('profile.edit') ? 'active' : null }}">
         <a class="menu-link" href="{{ route('profile.index') }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-user-circle"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"

@@ -17,6 +17,8 @@
 <script src="{{ asset('assets/js/extended-ui-blockui.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/block-ui/block-ui.js') }}"></script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+
 <script>
     function showBlockUI(element = null, message = '') {
         blockUIOptions = {
@@ -46,18 +48,18 @@
         }
     }
 
-    Pusher.logToConsole = true;
+    // Pusher.logToConsole = true;
 
-    var pusher = new Pusher('9cc37d7ad5479dc34ceb', {
-        cluster: 'ap3'
-    });
+    // var pusher = new Pusher('9cc37d7ad5479dc34ceb', {
+    //     cluster: 'ap3'
+    // });
 
-    var chatChannel = pusher.subscribe('chat-send');
-    chatChannel.bind('App\\Events\\ChatEvent', function(data) {
-        alert('in');
-        // showBlockUI('#documents-table-form');
-        // $('#document-approval-table').DataTable().ajax.reload();
-    });
+    // var chatChannel = pusher.subscribe('chat-send');
+    // chatChannel.bind('App\\Events\\ChatEvent', function(data) {
+    //     alert('in');
+    //     // showBlockUI('#documents-table-form');
+    //     // $('#document-approval-table').DataTable().ajax.reload();
+    // });
 </script>
 
 @yield('vendor-script')
@@ -81,4 +83,3 @@
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
-

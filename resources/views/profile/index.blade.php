@@ -65,7 +65,7 @@
                                     @endif
                                 </ul>
                             </div>
-                            <a href="javascript:void(0)" class="btn btn-primary">
+                            <a href="{{ route('profile.edit', ['id' => Auth::id()]) }}" class="btn btn-primary">
                                 <i class='ti ti-user-check me-1'></i> Edit
                             </a>
                         </div>

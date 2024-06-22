@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

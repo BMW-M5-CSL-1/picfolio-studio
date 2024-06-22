@@ -285,7 +285,7 @@
                             <div class="invalid-feedback ">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
                     <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancel</button>
                 </form>
@@ -304,7 +304,6 @@
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
 @endsection
 
 @section('page-script')

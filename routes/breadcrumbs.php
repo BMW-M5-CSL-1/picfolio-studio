@@ -38,36 +38,6 @@ Breadcrumbs::for('stakeholders.index', function (BreadcrumbTrail $trail) {
     $trail->push('Stakeholders', route('stakeholders.index'));
 });
 
-// Paper Type
-Breadcrumbs::for('paper-type.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Paper Type', route('paper-type.index'));
-});
-
-// Paper Quality
-Breadcrumbs::for('paper-quality.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Paper Quality', route('paper-quality.index'));
-});
-
-// Location
-Breadcrumbs::for('location.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Location', route('location.index'));
-});
-
-// Location
-Breadcrumbs::for('route.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Route', route('route.index'));
-});
-
-// Design Breadcrumbs
-Breadcrumbs::for('design.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Design', route('design.index'));
-});
-
 // Orders Breadcrumbs
 Breadcrumbs::for('orders.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
@@ -98,30 +68,6 @@ Breadcrumbs::for('orders.show', function (BreadcrumbTrail $trail) {
     $trail->push('Preview');
 });
 
-// Printing Press Breadcrumbs
-Breadcrumbs::for('printing-press.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Printing Press', route('printing-press.index'));
-});
-
-// Distributor Breadcrumbs
-Breadcrumbs::for('distributor.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Distributions', route('distributor.index'));
-});
-
-// Vehicle Media Breadcrumbs
-Breadcrumbs::for('vehicle-media.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Vehicle Media', route('vehicle-media.index'));
-});
-
-// Reports Breadcrumbs
-Breadcrumbs::for('reports.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Reports', route('reports.index'));
-});
-
 // Chat Breadcrumbs
 Breadcrumbs::for('chat.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
@@ -130,6 +76,9 @@ Breadcrumbs::for('chat.index', function (BreadcrumbTrail $trail) {
 
 // Profile Breadcrumbs
 Breadcrumbs::for('profile.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
     $trail->push('Profile', route('profile.index'));
+});
+
+Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
+    $trail->push('Edit Profile', route('profile.index'));
 });

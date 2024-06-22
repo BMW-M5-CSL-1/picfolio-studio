@@ -9,7 +9,7 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                , Business to Door Marketing, All Rights Reserved
+                , Pic Folio Studio, All Rights Reserved
             </div>
             <div>
 

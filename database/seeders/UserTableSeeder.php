@@ -29,7 +29,7 @@ class UserTableSeeder extends Seeder
                 'name' => 'User',
                 'email' => 'user@example.com',
                 'password' => Hash::make('password')
-            ], 
+            ],
         ];
 
         foreach ($users as $user) {
