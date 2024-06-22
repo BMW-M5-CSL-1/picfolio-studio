@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 });
 
 // Order
-Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
     });

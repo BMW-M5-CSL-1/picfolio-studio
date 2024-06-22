@@ -125,16 +125,17 @@
 
 {{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
 <li class="menu-item
-    {{-- {{ request()->routeIs('orders.index') ||
-    request()->routeIs('orders.create') ||
-    request()->routeIs('orders.show') ||
-    request()->routeIs('orders.edit')
+    {{ request()->routeIs('booking.index')
+    // ||
+    // request()->routeIs('booking.create') ||
+    // request()->routeIs('booking.show') ||
+    // request()->routeIs('booking.edit')
         ? 'active'
-        : null }} --}}
+        : null }}
         ">
-    <a class="menu-link" href="{{ route('orders.index') }}">
+    <a class="menu-link" href="{{ route('booking.index') }}">
         <i class="icon menu-icon ti ti-shopping-cart"></i>
-        <span class="menu-title text-truncate">Orders
+        <span class="menu-title text-truncate">Booking
         </span>
     </a>
 </li>

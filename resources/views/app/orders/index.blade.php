@@ -3,12 +3,12 @@
 @section('seo-breadcrumb')
     <h4 class="fw-bold py-3 mb-4 ">
         <span class="text-muted fw-light">
-            {{ Breadcrumbs::view('breadcrumbs::json-ld', 'orders.index') }}
+            {{ Breadcrumbs::view('breadcrumbs::json-ld', 'booking.index') }}
         </span>
     </h4>
 @endsection
 
-@section('title', 'Orders')
+@section('title', 'Booking')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
@@ -38,9 +38,9 @@
     <div class="content-header-left col-md-9 col-12">
         <div class="row breadcrumbs-top mb-0">
             <div class="col-12 align-items-center d-flex">
-                <h2 class="content-header-title float-start mb-0">Orders</h2>
+                <h2 class="content-header-title float-start mb-0">Bookings</h2>
                 <div class="breadcrumb-wrapper align-items-center">
-                    {{ Breadcrumbs::render('orders.index') }}
+                    {{ Breadcrumbs::render('booking.index') }}
                 </div>
             </div>
         </div>

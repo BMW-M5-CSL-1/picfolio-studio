@@ -39,9 +39,9 @@ Breadcrumbs::for('stakeholders.index', function (BreadcrumbTrail $trail) {
 });
 
 // Orders Breadcrumbs
-Breadcrumbs::for('orders.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('booking.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Orders', route('orders.index'));
+    $trail->push('Bookings', route('booking.index'));
 });
 
 Breadcrumbs::for('orders.create', function (BreadcrumbTrail $trail) {
