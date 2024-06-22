@@ -76,19 +76,6 @@
     </div>
     <!--/ Header -->
 
-    <!-- Navbar pills -->
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-pills flex-column flex-sm-row mb-4">
-                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i
-                            class='ti-xs ti ti-user-check me-1'></i> Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('pages/profile-projects') }}"><i
-                            class='ti-xs ti ti-layout-grid me-1'></i> Projects</a></li>
-            </ul>
-        </div>
-    </div>
-    <!--/ Navbar pills -->
-
     <!-- User Profile Content -->
     <div class="row">
         <div class="col-xl-4 col-lg-5 col-md-5">
@@ -144,105 +131,17 @@
                     <p class="card-text text-uppercase">Overview</p>
                     <ul class="list-unstyled mb-0">
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-check"></i><span
-                                class="fw-bold mx-2">Task Compiled:</span> <span>13.5k</span></li>
+                                class="fw-bold mx-2">Total Projects:</span> <span>13.5k</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-layout-grid"></i><span
-                                class="fw-bold mx-2">Projects Compiled:</span> <span>146</span></li>
-                        <li class="d-flex align-items-center"><i class="ti ti-users"></i><span
-                                class="fw-bold mx-2">Connections:</span> <span>897</span></li>
+                                class="fw-bold mx-2">Completed Projects:</span> <span>146</span></li>
+                        <li class="d-flex align-items-center"><i class="ti ti-users"></i><span class="fw-bold mx-2">Pending
+                                Projects:</span> <span>11</span></li>
                     </ul>
                 </div>
             </div>
             <!--/ Profile Overview -->
         </div>
         <div class="col-xl-8 col-lg-7 col-md-7">
-            <!-- Activity Timeline -->
-            <div class="card card-action mb-4">
-                <div class="card-header align-items-center">
-                    <h5 class="card-action-title mb-0">Activity Timeline</h5>
-                    <div class="card-action-element">
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle hide-arrow p-0" data-bs-toggle="dropdown"
-                                aria-expanded="false"><i class="ti ti-dots-vertical text-muted"></i></button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Share timeline</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Suggest edits</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Report bug</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body pb-0">
-                    <ul class="timeline ms-1 mb-0">
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-primary"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header">
-                                    <h6 class="mb-0">Client Meeting</h6>
-                                    <small class="text-muted">Today</small>
-                                </div>
-                                <p class="mb-2">Project meeting with john @10:15am</p>
-                                <div class="d-flex flex-wrap">
-                                    <div class="avatar me-2">
-                                        <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                            class="rounded-circle" />
-                                    </div>
-                                    <div class="ms-1">
-                                        <h6 class="mb-0">Lester McCarthy (Client)</h6>
-                                        <span>CEO of Infibeam</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-success"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header">
-                                    <h6 class="mb-0">Create a new project for client</h6>
-                                    <small class="text-muted">2 Day Ago</small>
-                                </div>
-                                <p class="mb-0">Add files to new design folder</p>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-danger"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header">
-                                    <h6 class="mb-0">Shared 2 New Project Files</h6>
-                                    <small class="text-muted">6 Day Ago</small>
-                                </div>
-                                <p class="mb-2">Sent by Mollie Dixon <img src="{{ asset('assets/img/avatars/4.png') }}"
-                                        class="rounded-circle me-3" alt="avatar" height="24" width="24"></p>
-                                <div class="d-flex flex-wrap gap-2 pt-1">
-                                    <a href="javascript:void(0)" class="me-3">
-                                        <img src="{{ asset('assets/img/icons/misc/doc.png') }}" alt="Document image"
-                                            width="15" class="me-2">
-                                        <span class="fw-semibold text-heading">App Guidelines</span>
-                                    </a>
-                                    <a href="javascript:void(0)">
-                                        <img src="{{ asset('assets/img/icons/misc/xls.png') }}" alt="Excel image"
-                                            width="15" class="me-2">
-                                        <span class="fw-semibold text-heading">Testing Results</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent border-0">
-                            <span class="timeline-point timeline-point-info"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header">
-                                    <h6 class="mb-0">Project status updated</h6>
-                                    <small class="text-muted">10 Day Ago</small>
-                                </div>
-                                <p class="mb-0">Woocommerce iOS App Completed</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!--/ Activity Timeline -->
             <!-- Projects table -->
             <div class="card mb-4">
                 <div class="card-datatable table-responsive">
@@ -263,6 +162,96 @@
             </div>
             <!--/ Projects table -->
         </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card">
+                <h4 class="card-header">
+                    My Portfolio
+                </h4>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <h5 class="card-header">Work Experience</h5>
+                        <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="ABC Company">
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled type="text" class="form-control"
+                                                value="Front End Developer" />
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="01-01-2023" />
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="01-12-2023" />
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <textarea disabled class="form-control work_description" rows="3">Working as a junior front end developer</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h5 class="card-header">Projects</h5>
+                        <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input disabled class="form-control" value="Pic Folio Studio">
+                                        </div>
+                                        <div class="col-6">
+                                            <input disabled class="form-control" value="Front End Developer" />
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <textarea disabled class="form-control" rows="3">My Final Year Project Pic Folio Studio</textarea>
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            Attachment...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h5 class="card-header">Certificates</h5>
+                        <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <input disabled value="Meta Frontend Developer" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="Meta" />
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="01-12-2022" />
+                                        </div>
+                                        <div class="col-3">
+                                            <input disabled class="form-control" value="01-06-2023" />
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <textarea disabled class="form-control" rows="3">Meta Front End Developer Certificate</textarea>
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            Attachment....
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!--/ User Profile Content -->
 @endsection

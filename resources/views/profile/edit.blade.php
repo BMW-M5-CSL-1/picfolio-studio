@@ -423,35 +423,32 @@
                         <div class="card-body">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <div data-repeater-item>
-                                        <div class="row">
-                                            <div class="col-11 mb-3">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <input disabled class="form-control" value="Pic Folio Studio">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input disabled class="form-control" value="Front End Developer" />
-                                                    </div>
-                                                    <div class="col-12 mt-2">
-                                                        <textarea disabled class="form-control" rows="3">My Final Year Project Pic Folio Studio</textarea>
-                                                    </div>
-                                                    <div class="col-12 mt-2">
-                                                        Attachment...
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-11 mb-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input disabled class="form-control" value="Pic Folio Studio">
                                                 </div>
-                                            </div>
-                                            <div class="col-1">
-                                                <div class="d-flex">
-                                                    <button
-                                                        class="remove_project btn btn-outline-danger waves-effect waves-float waves-light btn-xs new-floor_btn"
-                                                        id="" type="button">
-                                                        <i class="ti ti-x"></i>
-                                                    </button>
+                                                <div class="col-6">
+                                                    <input disabled class="form-control" value="Front End Developer" />
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    <textarea disabled class="form-control" rows="3">My Final Year Project Pic Folio Studio</textarea>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                    Attachment...
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
+                                        <div class="col-1">
+                                            <div class="d-flex">
+                                                <button
+                                                    class="remove_project btn btn-outline-danger waves-effect waves-float waves-light btn-xs new-floor_btn"
+                                                    id="" type="button">
+                                                    <i class="ti ti-x"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
