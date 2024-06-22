@@ -117,6 +117,46 @@
 @endcan
 {{-- @endcanany --}}
 
+{{-- @canany(['location.index', 'route.index', 'paper-type.index', 'paper-quality.index', 'design.index', 'orders.index', 'orders.create', 'orders.show', 'printing-press.index', 'distributor.index', 'vehicle-media.index']) --}}
+<li class="menu-header">
+    <span data-i18n="Management">Management</span>
+</li>
+{{-- @endcanany --}}
+
+{{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
+<li class="menu-item
+    {{-- {{ request()->routeIs('orders.index') ||
+    request()->routeIs('orders.create') ||
+    request()->routeIs('orders.show') ||
+    request()->routeIs('orders.edit')
+        ? 'active'
+        : null }} --}}
+        ">
+    <a class="menu-link" href="#">
+        <i class="icon menu-icon ti ti-shopping-cart"></i>
+        <span class="menu-title text-truncate">Orders
+        </span>
+    </a>
+</li>
+{{-- @endcanany --}}
+
+<li class="menu-item
+    {{-- {{ request()->routeIs('orders.index') ||
+    request()->routeIs('orders.create') ||
+    request()->routeIs('orders.show') ||
+    request()->routeIs('orders.edit')
+        ? 'active'
+        : null }} --}}
+        ">
+    <a class="menu-link" href="#">
+        <i class="icon menu-icon ti ti-photo">
+        </i>
+        <span class="menu-title text-truncate">Pictures
+        </span>
+    </a>
+</li>
+
+
 {{-- Chat --}}
 @canany(['chat.index', 'profile.index', 'profile.edit'])
     <li class="menu-header">
