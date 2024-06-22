@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -78,12 +79,6 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         });
     });
 
-    // Order
-    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
-
-        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
-        });
-    });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
@@ -91,6 +86,13 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+});
+
+// Order
+Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
     });
 });
 

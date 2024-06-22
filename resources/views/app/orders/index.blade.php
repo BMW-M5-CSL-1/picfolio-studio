@@ -48,7 +48,63 @@
 @endsection
 
 @section('content')
-    <div class="row g-4 mb-4">
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-datatable table-responsive">
+            <table class="datatables-orders table border-top">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Order No</th>
+                        <th>User</th>
+                        <th>Photographer</th>
+                        <th class="w-px-200">Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1001</td>
+                        <td>John Doe</td>
+                        <td>Jane Smith</td>
+                        <td><span class="badge badge-success">Completed</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1002</td>
+                        <td>Mary Johnson</td>
+                        <td>Mike Brown</td>
+                        <td><span class="badge badge-warning">Pending</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>1003</td>
+                        <td>James Williams</td>
+                        <td>Sarah Davis</td>
+                        <td><span class="badge badge-danger">Cancelled</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">View</button>
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+    {{-- <div class="row g-4 mb-4">
         <div class="col-sm-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
@@ -69,7 +125,6 @@
                             <small>Total Orders</small>
                         </div>
                         <span class="badge bg-label-primary rounded p-2">
-                            {{-- <i class="ti ti-shopping-cart ti-sm"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-shopping-cart-filled" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -107,7 +162,6 @@
                             <small>Recent analytics </small>
                         </div>
                         <span class="badge bg-label-secondary rounded p-2">
-                            {{-- <i class="ti ti-shopping-cart-plus ti-sm"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -144,7 +198,6 @@
                             <small>Recent analytics </small>
                         </div>
                         <span class="badge bg-label-info rounded p-2">
-                            {{-- <i class="ti ti-shopping-cart-plus ti-sm"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-copy"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -215,7 +268,6 @@
                             <small>Recent analytics</small>
                         </div>
                         <span class="badge bg-label-warning rounded p-2">
-                            {{-- <i class="ti ti-shopping-cart-exclamation ti-sm"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-shopping-cart-exclamation" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -284,7 +336,6 @@
                             <small>Recent analytics</small>
                         </div>
                         <span class="badge bg-label-danger rounded p-2">
-                            {{-- <i class="ti ti-user-shopping-cart-minus ti-sm"></i> --}}
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -322,15 +373,15 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Users List Table -->
-    <div class="card">
-        <div class="card-body">
+    </div> --}}
+
+    {{-- <div class="card">
+        <div class="card-body"> --}}
             {{-- <form action="#" id="design_form" method="get"> --}}
-            {{ $dataTable->table() }}
+            {{-- {{ $dataTable->table() }} --}}
             {{-- </form> --}}
-        </div>
-    </div>
+        {{-- </div>
+    </div> --}}
 
     {{-- Modal for Details --}}
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
@@ -361,7 +412,7 @@
 @endsection
 
 @section('page-script')
-    {{ $dataTable->scripts() }}
+    {{-- {{ $dataTable->scripts() }} --}}
 
     <script>
         // Variable declaration for table
@@ -378,5 +429,5 @@
         }
     </script>
 
-    @include('app.orders.index-scripts')
+    {{-- @include('app.orders.index-scripts') --}}
 @endsection

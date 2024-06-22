@@ -33,61 +33,14 @@ class OrderDataTable extends DataTable
                 return $order->order_no ?? '-';
             })
             ->editColumn('type', function ($order) {
-                if ($order->type == 'paper_media') {
-                    return '<span class="text-capitalize">paper media</span>';
-                } elseif ($order->type == 'vehicle_media') {
-                    return '<span class="text-capitalize">vehicle media</span>';
-                } else {
-                    return '-';
-                }
+                return '-';
             })
-            ->editColumn('paper_type', function ($order) {
-                return $order->paper_types->name ?? '-';
-            })
-            ->editColumn('paper_quality', function ($order) {
-                return $order->paper_types->paper_qualities->name ?? '-';
-            })
-            ->editColumn('sides', function ($order) {
-                if ($order) {
-                    return '<span class="text-capitalize">' . $order->paper_types->side . '</span>';
-                }
-            })
-            ->editColumn('total_copies', function ($order) {
-                return number_format($order->total_copies) ?? '-';
-            })
-            ->editColumn('distribution_type', function ($order) {
-                if (!is_null($order->distribution_type)) {
-                    return '<span class="text-capitalize">' . $order->distribution_type . '</span>';
-                } else {
-                    return '-';
-                }
-            })
-            ->editColumn('duration', function ($order) {
-                return $order->duration ?? '-';
-            })
+
             ->editColumn('price', function ($order) {
                 return number_format($order->price) . ' Rs./-';
             })
-            ->editColumn('design', function ($order) {
-                return '<a href="#" class="detailsModal" data-bs-toggle="modal"  data-bs-target="#detailsModal" data-id="' . $order->id . '" data-modaltype="template">View</a>';
-            })
-            ->editColumn('primary_color', function ($order) {
-                return '<span style"background-color: ' . $order->primary_color . '"> ' . $order->primary_color . '</span>';
-            })
-            ->editColumn('secondary_color', function ($order) {
-                return '<span style"background-color: ' . $order->secondary_color . ' !important;"> ' . $order->secondary_color . '</span>';
-            })
-            ->editColumn('tertiary_color', function ($order) {
-                return '<span style"border:2px solid ' . $order->tertiary_color . ';"> ' . $order->tertiary_color . '</span>';
-            })
             ->editColumn('comments', function ($order) {
                 return '<a href="#" class="detailsModal" data-bs-toggle="modal"  data-bs-target="#detailsModal" data-id="' . $order->id . '" data-modaltype="comments">View</a>';
-            })
-            ->editColumn('locations', function ($order) {
-                return '<a href="#" class="detailsModal" data-bs-toggle="modal"  data-bs-target="#detailsModal" data-id="' . $order->id . '" data-modaltype="locations">View</a>';
-            })
-            ->editColumn('attachments', function ($order) {
-                return '<a href="#" class="detailsModal"  data-bs-toggle="modal"  data-bs-target="#detailsModal" data-id="' . $order->id . '" data-modaltype="attachments">View</a>';
             })
             ->editColumn('created_at', function ($order) {
                 if (isset($order->created_at)) {

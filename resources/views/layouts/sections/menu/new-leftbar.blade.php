@@ -132,7 +132,7 @@
         ? 'active'
         : null }} --}}
         ">
-    <a class="menu-link" href="#">
+    <a class="menu-link" href="{{ route('orders.index') }}">
         <i class="icon menu-icon ti ti-shopping-cart"></i>
         <span class="menu-title text-truncate">Orders
         </span>
