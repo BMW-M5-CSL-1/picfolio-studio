@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StakeholderManagementController;
@@ -83,6 +84,12 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [ProfileController::class, 'update'])->name('update');
+        Route::post('ajax/portfolio/store', [PortfolioController::class, 'store'])->name('ajax-portfolio-store');
+        Route::get('ajax/show-work', [PortfolioController::class, 'showWork'])->name('ajax-show-work');
+        Route::get('ajax/show-project', [PortfolioController::class, 'showProject'])->name('ajax-show-project');
+        Route::get('ajax/show-certificate', [PortfolioController::class, 'showCertificate'])->name('ajax-show-certificate');
+
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -94,8 +101,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
-        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
-        });
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {});
     });
 
     Route::group(['prefix' => 'gallery', 'as' => 'gallery.'], function () {

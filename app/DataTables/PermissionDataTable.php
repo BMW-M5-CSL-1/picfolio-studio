@@ -94,8 +94,10 @@ class PermissionDataTable extends DataTable
             ->buttons($buttons)
             ->scrollX(true)
             ->scrollCollapse(true)
-            ->scrollY('500px')
             ->fixedColumns(true)
+            ->select([
+                'style' => 'multi',
+            ])
             ->fixedColumnsLeftColumns();
     }
 

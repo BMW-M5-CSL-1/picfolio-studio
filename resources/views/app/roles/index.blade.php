@@ -51,7 +51,7 @@
                         <div class="d-flex justify-content-between align-items-end mt-1">
                             <div class="role-heading">
 
-                                <h4 class="mb-1 text-capitalize ">{{ $role->name }}&nbsp;( {{ $role->guard_name }} )
+                                <h4 class="mb-1 text-capitalize ">{{ $role->name }}
                                 </h4>
                                 @can('roles.edit')
                                     <a href="{{ route('roles.edit', ['id' => $role->id]) }}"><span>Edit Role</span></a>

@@ -86,6 +86,8 @@
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-user"></i><span class="fw-bold mx-2">Full
                                 Name:</span> <span>{{ Auth::user()->name ?? '-' }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="ti ti-123"></i><span
+                                class="fw-bold mx-2">CNIC:</span> <span>{{ Auth::user()->cnic ?? '-' }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-check"></i><span
                                 class="fw-bold mx-2">Status:</span> <span>Active</span></li>
                         <li class="d-block align-items-center mb-3"><i class="ti ti-shield-lock"></i><span
@@ -107,7 +109,7 @@
                     <small class="card-text text-uppercase">Contacts</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-phone-call"></i><span
-                                class="fw-bold mx-2">Contact:</span> <span>(123) 456-7890</span></li>
+                                class="fw-bold mx-2">Contact:</span> <span>(+92) {{ Auth::user()->contact }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-mail"></i><span
                                 class="fw-bold mx-2">Email:</span> <span>{{ Auth::user()->email ?? '-' }}</span></li>
                     </ul>
@@ -143,7 +145,7 @@
         </div>
         <div class="col-xl-8 col-lg-7 col-md-7">
             <!-- Projects table -->
-            <div class="card mb-4">
+            {{-- <div class="card mb-4">
                 <div class="card-datatable table-responsive">
                     <table class="datatables-projects table border-top">
                         <thead>
@@ -158,6 +160,39 @@
                             </tr>
                         </thead>
                     </table>
+                </div>
+            </div> --}}
+
+            <div class="card mb-3">
+                <h5 class="card-header">Work Experience</h5>
+                <div class="card-body">
+                    <div class="card-datatable table-responsive" id="">
+                        <div class="card-datatable table-responsive">
+                            <table class="table" id="work_table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h5 class="card-header">Projects</h5>
+                <div class="card-body">
+                    <div class="card-datatable table-responsive" id="">
+                        <div class="card-datatable table-responsive">
+                            <table class="table" id="project_table"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h5 class="card-header">Certificate/Education</h5>
+                <div class="card-body">
+                    <div class="card-datatable table-responsive" id="">
+                        <div class="card-datatable table-responsive">
+                            <table class="table" id="certificate_table"></table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--/ Projects table -->
@@ -180,4 +215,168 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/pages-profile.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $(function() {
+                loadDataTable('work_table');
+                loadDataTable('project_table');
+                loadDataTable('certificate_table');
+            })
+        });
+
+        let firstLoadWork = true;
+        let firstLoadProject = true;
+        let firstLoadCertificate = true;
+
+        function loadDataTable(id) {
+            let url = null,
+                column2 = null;
+            if (id == 'work_table') {
+                url = '{{ route('profile.ajax-show-work') }}';
+                column2 = 'Company Name';
+                if (!firstLoadWork) {
+                    return false;
+                }
+                firstLoadWork = false;
+            } else if (id == 'project_table') {
+                url = '{{ route('profile.ajax-show-project') }}';
+                column2 = 'Role';
+                if (!firstLoadProject) {
+                    return false;
+                }
+                firstLoadProject = false;
+            } else {
+                url = '{{ route('profile.ajax-show-certificate') }}';
+                column2 = 'Institution';
+                if (!firstLoadCertificate) {
+                    return false;
+                }
+                firstLoadCertificate = false;
+            }
+
+            window.LaravelDataTables = window.LaravelDataTables || {};
+            window.LaravelDataTables[id] = $("#" + id).DataTable({
+                "serverSide": true,
+                "processing": false,
+                "ajax": {
+                    "url": url,
+                    "type": "GET",
+                    "data": function(data) {
+                        for (var i = 0, len = data.columns.length; i < len; i++) {
+                            if (!data.columns[i].search.value) delete data.columns[i].search;
+                            if (data.columns[i].searchable === true) delete data.columns[i]
+                                .searchable;
+                            if (data.columns[i].orderable === true) delete data.columns[i]
+                                .orderable;
+                            if (data.columns[i].data === data.columns[i].name) delete data.columns[
+                                    i]
+                                .name;
+                        }
+                        delete data.search.regex;
+                    }
+                },
+                "columns": [{
+                        "data": "DT_RowIndex",
+                        "name": "DT_RowIndex",
+                        "title": "#",
+                        "orderable": false,
+                        "searchable": false,
+                        "className": "text-nowrap",
+                    }, {
+                        "data": "name",
+                        "name": "name",
+                        "title": "name",
+                        "orderable": false,
+                        "searchable": false,
+                        "className": "text-nowrap"
+                    }, {
+                        "data": "column_2",
+                        "name": "column_2",
+                        "title": column2,
+                        "orderable": true,
+                        "searchable": true,
+                        "className": "text-nowrap"
+                    },
+                    {
+                        "data": "start_date",
+                        "name": "start_date",
+                        "title": "start date",
+                        "orderable": true,
+                        "searchable": true,
+                        "className": "text-nowrap"
+                    }, {
+                        "data": "end_date",
+                        "name": "end_date",
+                        "title": "end date",
+                        "orderable": false,
+                        "searchable": false,
+                        "className": "text-nowrap"
+                    }, {
+                        "data": "description",
+                        "name": "description",
+                        "title": "description",
+                        "orderable": false,
+                        "searchable": false,
+                        "className": "text-nowrap"
+                    },
+                    {
+                        "data": "created_at",
+                        "name": "created_at",
+                        "title": "Created At",
+                        "orderable": true,
+                        "searchable": true,
+                        "className": "text-nowrap"
+                        // }, {
+                        //     "data": "cancelled_by",
+                        //     "name": "cancelled_by",
+                        //     "title": "Cancelled By",
+                        //     "orderable": true,
+                        //     "searchable": true,
+                        //     "className": "text-nowrap"
+                        // }, {
+                        //     "data": "cancelled_at",
+                        //     "name": "cancelled_at",
+                        //     "title": "Cancelled At",
+                        //     "orderable": true,
+                        //     "searchable": true,
+                        //     "className": "text-nowrap"
+                        // }, {
+                        //     "data": "reason",
+                        //     "name": "reason",
+                        //     "title": "Reason",
+                        //     "orderable": true,
+                        //     "searchable": true,
+                        //     "className": "text-nowrap"
+                        // }, {
+                        //     "data": "action",
+                        //     "name": "action",
+                        //     "title": "Action",
+                        //     "orderable": false,
+                        //     "searchable": false,
+                        //     "className": "text-nowrap"
+                    }
+                ],
+                "dom": "<\"row me-2\"<\"col-md-2\"<\"me-3\"l>><\"col-md-10\"<\"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0\"fB>>>t<\"row mx-2\"<\"col-sm-12 col-md-6\"i><\"col-sm-12 col-md-6\"p>>",
+                "scrollX": true,
+                "searchDelay": 900,
+                "lengthMenu": [30, 50, 100],
+                "select": {
+                    "style": "multi"
+                },
+                "pageLength": 50,
+                "language": {
+                    "sLengthMenu": "_MENU_",
+                    "search": "",
+                    "searchPlaceholder": "Search..",
+                    "processing": "<img width=\"50\" src=\"assets\/img\/loader.gif\"\/>"
+                },
+                "buttons": [
+                    [],
+                ]
+            });
+        }
+    </script>
+
 @endsection
