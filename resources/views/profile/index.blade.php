@@ -17,7 +17,7 @@
     <div class="content-header-left col-md-9 col-12">
         <div class="row breadcrumbs-top mb-0">
             <div class="col-12 align-items-center d-flex">
-                <h2 class="content-header-title float-start mb-0">Profile</h2>
+                {{-- <h2 class="content-header-title float-start mb-0">Profile</h2> --}}
                 <div class="breadcrumb-wrapper align-items-center">
                     {{ Breadcrumbs::render('profile.index') }}
                 </div>
@@ -162,9 +162,6 @@
             </div>
             <!--/ Projects table -->
         </div>
-
-        w
-
     </div>
     <!--/ User Profile Content -->
 @endsection
