@@ -125,6 +125,12 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can Update Profile',
                 'title' => 'Profile',
             ],
+            [
+                'name' => 'profile.portfolio.delete',
+                'guard_name' => 'web',
+                'show_name' => 'Can Delete Portfolio',
+                'title' => 'Profile',
+            ]
         ];
 
         foreach ($data as $permission) {

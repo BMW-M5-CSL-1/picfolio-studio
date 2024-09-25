@@ -26,7 +26,7 @@ class RoleController extends Controller
 
     public function index(RoleDataTable $dataTable)
     {
-        $roles = Role::select('id', 'name', 'slug', 'guard_name')->get();
+        $roles = Role::select('id', 'name', 'slug', 'guard_name')->orderBy('name')->get();
         // return $dataTable->render('app.roles.index', ['roles' => $roles]);
         return view('app.roles.index', ['roles' => $roles]);
     }

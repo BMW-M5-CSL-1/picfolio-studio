@@ -90,8 +90,8 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
             Route::get('show-work', [PortfolioController::class, 'showWork'])->name('show-work');
             Route::get('show-project', [PortfolioController::class, 'showProject'])->name('show-project');
             Route::get('show-certificate', [PortfolioController::class, 'showCertificate'])->name('show-certificate');
-            Route::post('delete/{id}/{type}', [PortfolioController::class, 'delete'])->name('delete');
         });
+        Route::post('portfolio/delete/{id}/{type}', [PortfolioController::class, 'delete'])->name('portfolio.delete');
 
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

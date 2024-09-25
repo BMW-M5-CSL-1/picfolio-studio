@@ -92,5 +92,6 @@ Breadcrumbs::for('profile.index', function (BreadcrumbTrail $trail) {
 });
 
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
+    $trail->push('Profile');
     $trail->push('Edit Profile', route('profile.index'));
 });

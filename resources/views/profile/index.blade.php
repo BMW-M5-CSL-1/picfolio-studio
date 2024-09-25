@@ -227,8 +227,9 @@
         });
 
         function deleteRecord(id, type) {
-            let url = "{{ route('profile.ajax-delete', ['id' => ':id', 'type' => ':type']) }}".replace(':id', id).replace(
-                ':type', type);
+            let url = "{{ route('profile.portfolio.delete', ['id' => ':id', 'type' => ':type']) }}".replace(':id', id)
+                .replace(
+                    ':type', type);
 
             Swal.fire({
                 icon: 'warning',
@@ -302,6 +303,10 @@
                 }
                 firstLoadCertificate = false;
             }
+            let delete_permission = false;
+            @can('profile.portfolio.delete')
+                delete_permission = true;
+            @endcan
 
             window.LaravelDataTables = window.LaravelDataTables || {};
             window.LaravelDataTables[id] = $("#" + id).DataTable({
@@ -342,8 +347,8 @@
                         "data": "column_2",
                         "name": "column_2",
                         "title": column2,
-                        "orderable": true,
-                        "searchable": true,
+                        "orderable": false,
+                        "searchable": false,
                         "className": "text-nowrap"
                     },
                     {
@@ -402,7 +407,8 @@
                         "title": "Action",
                         "orderable": false,
                         "searchable": false,
-                        "className": "text-nowrap"
+                        "className": "text-nowrap",
+                        "visible": delete_permission
                     }
                 ],
                 "dom": "<\"row me-2\"<\"col-md-2\"<\"me-3\"l>><\"col-md-10\"<\"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0\"fB>>>t<\"row mx-2\"<\"col-sm-12 col-md-6\"i><\"col-sm-12 col-md-6\"p>>",

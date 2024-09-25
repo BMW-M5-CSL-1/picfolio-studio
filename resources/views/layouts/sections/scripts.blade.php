@@ -18,6 +18,8 @@
 <script src="{{ asset('assets/vendor/libs/block-ui/block-ui.js') }}"></script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
 
 <script>
     function showBlockUI(element = null, message = '') {

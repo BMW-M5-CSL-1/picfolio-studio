@@ -18,8 +18,8 @@ class RoleTableSeeder extends Seeder
         //
         $roles = [
             [
-                'name' => 'Super Admin',
-                'slug' => 'super_admin',
+                'name' => 'Admin',
+                'slug' => 'admin',
                 'guard_name' => 'web'
             ], [
                 'name' => 'User',
@@ -29,7 +29,7 @@ class RoleTableSeeder extends Seeder
                 'name' => 'Photographer',
                 'slug' => 'photographer',
                 'guard_name' => 'web'
-            ], 
+            ],
         ];
 
         foreach ($roles as $role) {
