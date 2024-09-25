@@ -32,7 +32,7 @@ class WorkExperienceDataTable extends DataTable
                 return $model->job_title ?? '-';
             })
             ->editColumn('created_at', function ($model) {
-                return Carbon::parse($model->created_at)->format('d/m/Y');
+                return Carbon::parse($model->created_at)->toDayDateTimeString();
             })
             ->editColumn('action', function ($model) {
                 return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'work\')"><i class="ti ti-trash"></i></a>';
