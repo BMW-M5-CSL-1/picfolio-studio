@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\CertificateEducation;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -29,6 +30,12 @@ class CertificateEducationDataTable extends DataTable
         })
         ->editColumn('column_2', function ($model) {
             return $model->institution ?? '-';
+        })
+        ->editColumn('created_at', function ($model) {
+            return Carbon::parse($model->created_at)->format('d/m/Y');
+        })
+        ->editColumn('action', function ($model) {
+            return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'certificate\')"><i class="ti ti-trash"></i></a>';
         })
         ->addIndexColumn()
         ->addColumn('action', 'certificateeducation.action')

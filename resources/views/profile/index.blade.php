@@ -226,6 +226,53 @@
             })
         });
 
+        function deleteRecord(id, type) {
+            let url = "{{ route('profile.ajax-delete', ['id' => ':id', 'type' => ':type']) }}".replace(':id', id).replace(
+                ':type', type);
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Are You Sure ?',
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes, Partial Paid',
+                confirmButtonClass: 'btn-success',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                },
+                showLoaderOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: "",
+                        dataType: "json",
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Data Deleted',
+                                confirmButtonClass: 'btn btn-success',
+                                buttonsStyling: false,
+                            });
+                            datatableCustomReload();
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to Delete Data'
+                            })
+                        }
+                    });
+                }
+            });
+        }
+
         let firstLoadWork = true;
         let firstLoadProject = true;
         let firstLoadCertificate = true;
@@ -349,13 +396,13 @@
                         //     "orderable": true,
                         //     "searchable": true,
                         //     "className": "text-nowrap"
-                        // }, {
-                        //     "data": "action",
-                        //     "name": "action",
-                        //     "title": "Action",
-                        //     "orderable": false,
-                        //     "searchable": false,
-                        //     "className": "text-nowrap"
+                    }, {
+                        "data": "action",
+                        "name": "action",
+                        "title": "Action",
+                        "orderable": false,
+                        "searchable": false,
+                        "className": "text-nowrap"
                     }
                 ],
                 "dom": "<\"row me-2\"<\"col-md-2\"<\"me-3\"l>><\"col-md-10\"<\"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0\"fB>>>t<\"row mx-2\"<\"col-sm-12 col-md-6\"i><\"col-sm-12 col-md-6\"p>>",

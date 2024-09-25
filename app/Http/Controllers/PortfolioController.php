@@ -95,4 +95,37 @@ class PortfolioController extends Controller
     {
         return $table->ajax();
     }
+
+    public function delete($id, $type)
+    {
+        return DB::transaction(function () use ($id, $type) {
+            if ($type == 'certificate') {
+                $certificate = CertificateEducation::find($id);
+                if ($certificate) {
+                    $certificate->delete();
+                    return response()->json(['message' => 'Certificate deleted successfully']);
+                } else {
+                    return response()->json(['message' => 'Data Not Found !'], 500);
+                }
+            } elseif ($type == 'work') {
+                $work = WorkExperience::find($id);
+                if ($work) {
+                    $work->delete();
+                    return response()->json(['message' => 'Work experience deleted successfully']);
+                } else {
+                    return response()->json(['message' => 'Data Not Found !'], 500);
+                }
+            } elseif ($type == 'project') {
+                $project = Project::find($id);
+                if ($project) {
+                    $project->delete();
+                    return response()->json(['message' => 'Project deleted successfully']);
+                } else {
+                    return response()->json(['message' => 'Data Not Found !'], 500);
+                }
+            } else {
+                return response()->json(['message' => 'No such record found'], 500);
+            }
+        });
+    }
 }

@@ -85,10 +85,14 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [ProfileController::class, 'update'])->name('update');
-        Route::post('ajax/portfolio/store', [PortfolioController::class, 'store'])->name('ajax-portfolio-store');
-        Route::get('ajax/show-work', [PortfolioController::class, 'showWork'])->name('ajax-show-work');
-        Route::get('ajax/show-project', [PortfolioController::class, 'showProject'])->name('ajax-show-project');
-        Route::get('ajax/show-certificate', [PortfolioController::class, 'showCertificate'])->name('ajax-show-certificate');
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+            Route::post('portfolio/store', [PortfolioController::class, 'store'])->name('portfolio-store');
+            Route::get('show-work', [PortfolioController::class, 'showWork'])->name('show-work');
+            Route::get('show-project', [PortfolioController::class, 'showProject'])->name('show-project');
+            Route::get('show-certificate', [PortfolioController::class, 'showCertificate'])->name('show-certificate');
+            Route::post('delete/{id}/{type}', [PortfolioController::class, 'delete'])->name('delete');
+        });
+
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

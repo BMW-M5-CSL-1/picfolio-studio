@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -24,13 +25,19 @@ class ProjectDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->editColumn('name', function ($model) {
-            return $model->name ?? '-';
-        })
-        ->editColumn('column_2', function ($model) {
-            return $model->role ?? '-';
-        })
-        ->addIndexColumn()
+            ->editColumn('name', function ($model) {
+                return $model->name ?? '-';
+            })
+            ->editColumn('column_2', function ($model) {
+                return $model->role ?? '-';
+            })
+            ->editColumn('created_at', function ($model) {
+                return Carbon::parse($model->created_at)->format('d/m/Y');
+            })
+            ->editColumn('action', function ($model) {
+                return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'project\')"><i class="ti ti-trash"></i></a>';
+            })
+            ->addIndexColumn()
             ->addColumn('action', 'project.action')
             ->setRowId('id');
     }
@@ -54,20 +61,20 @@ class ProjectDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('project-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('project-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -79,10 +86,10 @@ class ProjectDataTable extends DataTable
     {
         return [
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('id'),
             Column::make('add your columns'),
             Column::make('created_at'),

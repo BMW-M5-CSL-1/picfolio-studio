@@ -48,6 +48,21 @@
         }
     }
 
+    function datatableCustomReload() {
+        var $searchRInput = $(document).find('.dataTables_filter input');
+        $.each($searchRInput, function(key, value) {
+            try {
+                // console.log($(value).parent());
+                // $(this).blur();
+                var TableId = $(this).attr('aria-controls')
+                window.LaravelDataTables[TableId]['ajax'].reload(null, false)
+            } catch (error) {
+                $(this).blur();
+                console.error("Error: " + error);
+            }
+        })
+    }
+
     // Pusher.logToConsole = true;
 
     // var pusher = new Pusher('9cc37d7ad5479dc34ceb', {
