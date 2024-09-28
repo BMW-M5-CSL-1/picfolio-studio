@@ -123,6 +123,18 @@
 </li>
 {{-- @endcanany --}}
 
+@can('event.index')
+    <li class="menu-item
+    {{ request()->routeIs('event.*') ? 'active' : null }}
+        ">
+        <a class="menu-link" href="{{ route('event.index') }}">
+            <i class="icon menu-icon ti ti-calendar-event"></i>
+            <span class="menu-title text-truncate">Event
+            </span>
+        </a>
+    </li>
+@endcan
+
 {{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
 <li class="menu-item
     {{ request()->routeIs('booking.*') ? 'active' : null }}

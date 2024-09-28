@@ -130,7 +130,45 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web',
                 'show_name' => 'Can Delete Portfolio',
                 'title' => 'Profile',
-            ]
+            ],
+
+            // Event
+            [
+                'name' => 'event.index',
+                'guard_name' => 'web',
+                'show_name' => 'Can View Events',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.create',
+                'guard_name' => 'web',
+                'show_name' => 'Can Create Events',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.store',
+                'guard_name' => 'web',
+                'show_name' => 'Can Store Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.edit',
+                'guard_name' => 'web',
+                'show_name' => 'Can Edit Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.update',
+                'guard_name' => 'web',
+                'show_name' => 'Can Update Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.delete',
+                'guard_name' => 'web',
+                'show_name' => 'Can Delete Event',
+                'title' => 'Event',
+            ],
         ];
 
         foreach ($data as $permission) {

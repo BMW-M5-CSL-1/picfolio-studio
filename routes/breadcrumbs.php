@@ -95,3 +95,8 @@ Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->push('Profile');
     $trail->push('Edit Profile', route('profile.index'));
 });
+
+Breadcrumbs::for('event.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard');
+    $trail->push('Event', route('event.index'));
+});

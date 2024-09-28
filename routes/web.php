@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
@@ -97,6 +98,15 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
+        Route::get('/', [EventController::class, 'index'])->name('index');
+        Route::get('create', [EventController::class, 'create'])->name('create');
+        Route::post('store', [EventController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [EventController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [EventController::class, 'update'])->name('update');
+        Route::post('delete/{id}', [EventController::class, 'delete'])->name('delete');
     });
 });
 
