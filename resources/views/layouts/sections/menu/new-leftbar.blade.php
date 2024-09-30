@@ -136,7 +136,7 @@
 @endcan
 
 {{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
-<li class="menu-item
+{{-- <li class="menu-item
     {{ request()->routeIs('booking.*') ? 'active' : null }}
         ">
     <a class="menu-link" href="{{ route('booking.index') }}">
@@ -144,7 +144,7 @@
         <span class="menu-title text-truncate">Booking
         </span>
     </a>
-</li>
+</li> --}}
 {{-- @endcanany --}}
 
 <li class="menu-item

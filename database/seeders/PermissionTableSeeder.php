@@ -169,6 +169,19 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can Delete Event',
                 'title' => 'Event',
             ],
+            [
+                'name' => 'event.raise-offer',
+                'guard_name' => 'web',
+                'show_name' => 'Can Raise Offer For Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.publish',
+                'guard_name' => 'web',
+                'show_name' => 'Can Publish Event',
+                'title' => 'Event',
+            ],
+
         ];
 
         foreach ($data as $permission) {

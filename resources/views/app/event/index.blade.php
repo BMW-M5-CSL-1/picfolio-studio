@@ -325,8 +325,8 @@
 
     {{-- Modal for Details --}}
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
-            <div class="modal-content">
+        <div class="modal-dialog modal-xl modal-simple modal-enable-otp modal-dialog-centered" style="max-width: 90%;">
+            <div class="modal-content p-0">
                 <div class="modal-header bg-transparent">
                     <button id="close_modal" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -340,7 +340,6 @@
 
 @section('vendor-script')
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 @endsection
 
 @section('page-script')
@@ -349,9 +348,155 @@
     <script>
         function create() {
             let url = '{{ route('event.create') }}';
-            console.log(url);
-
             location.href = url;
+        }
+
+        function publishEvent($id) {
+            Swal.fire({
+                title: "Publish This Event !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Once Proceeded, You Won't Edit !",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.publish', ['id' => ':id']) }}".replace(':id', $id);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'id': $id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ?? "Event Published Successfully !", {
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    timeOut: 2e3,
+                                    closeButton: !0,
+                                    tapToDismiss: !1,
+                                });
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function raiseOffer($id) {
+            Swal.fire({
+                title: "Reason !",
+                html: '<input id="offer" type="text" placeholder="Your Offer Amount" name="offer" class="form-control form-control-md" required />',
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: 'Are You Sure !',
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let offer = $('#offer').val();
+                    if (!offer) {
+                        Swal.fire('Offer amount is required')
+                    } else {
+                        let url = "{{ route('event.raise-offer', ['id' => ':id']) }}".replace(':id', $id);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: {
+                                'id': $id,
+                                'offer': offer
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.success) {
+                                    toastr.success(response.message ?? "Offer Raised Successfully !", {
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        timeOut: 2e3,
+                                        closeButton: !0,
+                                        tapToDismiss: !1,
+                                    });
+                                    // datatableCustomReload();
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: response.message ?? 'Something Went Wrong !',
+                                    });
+                                }
+                            },
+                            error: function(error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'An Error Occured!',
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        function listOffers($id) {
+            let url = "{{ route('event.ajax-details', ['id' => ':id']) }}".replace(':id', $id);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'id': $id,
+                    'query_for': 'offer_list'
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        $('#modalBody').empty();
+                        $('#modalBody').append(response.view);
+                        $('#detailsModal').modal('show');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message ?? 'Something Went Wrong !',
+                        });
+                    }
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An Error Occured!',
+                    });
+                }
+            });
         }
 
         // Variable declaration for table

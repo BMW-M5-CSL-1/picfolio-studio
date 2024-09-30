@@ -22,6 +22,7 @@ class Event extends Model
         'arieal_view',
         'status',
         'user_id',
+        'published_at',
     ];
 
     public function user()

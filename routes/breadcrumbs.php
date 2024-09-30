@@ -100,3 +100,15 @@ Breadcrumbs::for('event.index', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard');
     $trail->push('Event', route('event.index'));
 });
+
+Breadcrumbs::for('event.create', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard');
+    $trail->push('Event');
+    $trail->push('Create', route('event.create'));
+});
+
+Breadcrumbs::for('event.edit', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard');
+    $trail->push('Event');
+    $trail->push('Edit');
+});

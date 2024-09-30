@@ -107,6 +107,12 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::get('edit/{id}', [EventController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [EventController::class, 'update'])->name('update');
         Route::post('delete/{id}', [EventController::class, 'delete'])->name('delete');
+        Route::post('publish/{id}', [EventController::class, 'publish'])->name('publish');
+        Route::post('raise-offer/{id}', [EventController::class, 'raiseOffer'])->name('raise-offer');
+
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+            Route::post('details/{id}', [EventController::class, 'details'])->name('details');
+        });
     });
 });
 
