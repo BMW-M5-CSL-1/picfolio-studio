@@ -1,6 +1,6 @@
 @switch($query_for)
     @case('offer_list')
-        <h3 >Offer Details</h3>
+        <h3>Offer Details</h3>
         <div class="table-responsive table-bordered">
             <table class="table">
                 <thead class="table-light">
@@ -24,8 +24,8 @@
                                         <span class="badge rounded-pill bg-label-success text-capitalize">hired</span>
                                     @break
 
-                                    @case('pending')
-                                        <span class="badge rounded-pill bg-label-warning text-capitalize">pending</span>
+                                    @case('applied')
+                                        <span class="badge rounded-pill bg-label-warning text-capitalize">applied</span>
                                     @break
 
                                     @case('cancelled')
@@ -37,9 +37,23 @@
 
                             </td>
                             <td>
-                                @if ($offer->status == 'pending')
-                                    <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Hire Photographer"><i class="ti ti-plus"></i></a>
+                                @if (
+                                    $offer->status == 'applied' &&
+                                        $event->eventPhotographers()->where('status', 'hired')->count() < $event->required_photographers)
+                                    <a href="javascript:void(0)"
+                                        onclick="hirePhotographer({{ $offer->event_id }}, {{ $offer->photographer_id }}, '{{ $offer->photographer->name }}', {{ $offer->offer ?? 0 }})"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Hire Photographer"><i
+                                            class="ti ti-plus"></i></a>
+                                @endif
+
+                                @if (
+                                    $offer->status == 'hired' &&
+                                        $event->status != 'locked' &&
+                                        $event->eventPhotographers()->where('status', 'hired')->count() <= $event->required_photographers)
+                                    <a href="javascript:void(0)" class="text-danger"
+                                        onclick="cancelPhotographer({{ $offer->event_id }}, {{ $offer->photographer_id }}, '{{ $offer->photographer->name }}', {{ $offer->offer ?? 0 }})"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cancel Photographer"><i
+                                            class="ti ti-x"></i></a>
                                 @endif
                             </td>
                         </tr>

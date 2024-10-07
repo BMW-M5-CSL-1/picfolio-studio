@@ -23,6 +23,7 @@ class Event extends Model
         'status',
         'user_id',
         'published_at',
+        'closed_at',
     ];
 
     public function user()

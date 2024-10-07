@@ -17,6 +17,10 @@ return new class extends Migration
             if (!Schema::hasColumn('events', 'published_at')) {
                 $table->timestamp('published_at')->nullable();
             }
+
+            if (!Schema::hasColumn('events', 'closed_at')) {
+                $table->timestamp('closed_at')->nullable();
+            }
         });
     }
 
@@ -30,6 +34,10 @@ return new class extends Migration
         Schema::table('events', function (Blueprint $table) {
             if (Schema::hasColumn('events', 'published_at')) {
                 $table->dropColumn('published_at');
+            }
+
+            if (Schema::hasColumn('events', 'closed_at')) {
+                $table->dropColumn('closed_at');
             }
         });
     }

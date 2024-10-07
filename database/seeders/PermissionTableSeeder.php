@@ -181,6 +181,30 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can Publish Event',
                 'title' => 'Event',
             ],
+            [
+                'name' => 'event.hire-photographer',
+                'guard_name' => 'web',
+                'show_name' => 'Can Hire Photographer For Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.cancel-photographer',
+                'guard_name' => 'web',
+                'show_name' => 'Can Cancel Hiring Of Photographer For Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.lock',
+                'guard_name' => 'web',
+                'show_name' => 'Can Lock Event',
+                'title' => 'Event',
+            ],
+            [
+                'name' => 'event.close',
+                'guard_name' => 'web',
+                'show_name' => 'Can Close Event',
+                'title' => 'Event',
+            ],
 
         ];
 

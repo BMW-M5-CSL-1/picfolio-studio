@@ -408,14 +408,12 @@
         function raiseOffer($id) {
             Swal.fire({
                 title: "Reason !",
-                html: '<input id="offer" type="text" placeholder="Your Offer Amount" name="offer" class="form-control form-control-md" required />',
+                html: `<input id="offer" type="number" step="1" min="1" placeholder="Your Offer Amount" name="offer" class="form-control form-control-md" required /><br><span class="text-muted fs-6">Are You Sure, You'll Not Be Able To Raise Another Offer For This Event !</span>`,
                 icon: 'question',
-                confirmButtonText: 'Proceed',
-                text: 'Are You Sure !',
+                text: `Are You Sure, You'll Not Be Able To Raise Another Offer FOr This Event !`,
                 showCancelButton: true,
                 cancelButtonText: 'No, Cancel',
-                confirmButtonText: 'Yes',
-                buttonsStyling: false,
+                confirmButtonText: 'Proceed',
                 customClass: {
                     confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
                     cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
@@ -453,15 +451,240 @@
                                     });
                                 }
                             },
-                            error: function(error) {
+                            error: function(xhr) {
+                                let response = JSON.parse(xhr.responseText);
+                                let errorMessage = response.errors?.offer ? response.errors.offer[0] :
+                                    'An Error Occurred!';
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
-                                    text: 'An Error Occured!',
+                                    text: errorMessage,
                                 });
                             }
                         });
                     }
+                }
+            });
+        }
+
+        function hirePhotographer(event_id, photographer_id, name, amount) {
+            Swal.fire({
+                title: "Sure !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Hire Photographer (" + name + ") At " + amount + "/- Rs !",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.hire-photographer') }}";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'event_id': event_id,
+                            'photographer_id': photographer_id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ??
+                                    "Photographer Hired Successfully !", {
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        timeOut: 2e3,
+                                        closeButton: !0,
+                                        tapToDismiss: !1,
+                                    });
+                                $('#detailsModal').modal('hide');
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function cancelPhotographer(event_id, photographer_id, name, amount) {
+            Swal.fire({
+                title: "Sure !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Cancel Hiring of Photographer (" + name + ") At " + amount + "/- Rs !",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.cancel-photographer') }}";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'event_id': event_id,
+                            'photographer_id': photographer_id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ??
+                                    "Photographer Hired Successfully !", {
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        timeOut: 2e3,
+                                        closeButton: !0,
+                                        tapToDismiss: !1,
+                                    });
+                                $('#detailsModal').modal('hide');
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function lockEvent($id) {
+            Swal.fire({
+                title: "Lock This Event !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Once Proceeded, You Won't Hire/Cancel Photographer !",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.lock', ['id' => ':id']) }}".replace(':id', $id);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'id': $id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ?? "Event Locked Successfully !", {
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    timeOut: 2e3,
+                                    closeButton: !0,
+                                    tapToDismiss: !1,
+                                });
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function closeEvent($id) {
+            Swal.fire({
+                title: "Close This Event !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Event Completed ?",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.close', ['id' => ':id']) }}".replace(':id', $id);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'id': $id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ?? "Event Closed Successfully !", {
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    timeOut: 2e3,
+                                    closeButton: !0,
+                                    tapToDismiss: !1,
+                                });
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
                 }
             });
         }

@@ -244,6 +244,14 @@ class EventController extends Controller
 
     public function raiseOffer($id, Request $request)
     {
+        $request->validate([
+            'offer' => 'required|numeric|min:0',
+        ], [
+            'offer.required' => 'Offer Amount is required.',
+            'offer.numeric' => 'Offer Amount must be a valid number.',
+            'offer.min' => 'Offer Amount must be greater than 0.',
+        ]);
+
         return DB::transaction(function () use ($id, $request) {
             $event = Event::findOrFail($id);
             if ($event) {
@@ -252,7 +260,7 @@ class EventController extends Controller
                         'event_id' => $id,
                         'photographer_id' => Auth::id(),
                         'offer' => $request->offer ?? '',
-                        'status' => 'pending',
+                        'status' => 'applied',
                     ]);
 
                     return response()->json([
@@ -308,5 +316,117 @@ class EventController extends Controller
                 'message' => 'Data Not FOund !',
             ], 500);
         }
+    }
+
+    public function hirePhotographer(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            $event = Event::findOrFail($request->event_id);
+
+            if ($event->eventPhotographers()->where('status', 'hired')->count() >= $event->required_photographers) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'All required photographers have already been hired.',
+                ]);
+            }
+
+            $eventPhotographer = $event->eventPhotographers()->where('photographer_id', $request->photographer_id)->firstOrFail();
+            $eventPhotographer->update(['status' => 'hired']);
+
+            if ($event->eventPhotographers()->where('status', 'hired')->count() == $event->required_photographers) {
+                $event->update([
+                    'status' => 'in_process'
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Photographer Hired Successfully !',
+                'data' => $eventPhotographer,
+            ]);
+        });
+    }
+
+    public function cancelPhotographer(Request $request)
+    {
+        return DB::transaction(function () use ($request) {
+            $event = Event::findOrFail($request->event_id);
+
+            $eventPhotographer = $event->eventPhotographers()
+                ->where('photographer_id', $request->photographer_id)
+                ->where('status', 'hired')
+                ->firstOrFail();
+
+            $eventPhotographer->update(['status' => 'cancelled']);
+
+            // Check if the event status needs to be updated
+            $hiredPhotographersCount = $event->eventPhotographers()->where('status', 'hired')->count();
+            if ($hiredPhotographersCount < $event->required_photographers && $event->status == 'in_progress') {
+                $event->update(['status' => 'published']);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Hiring cancelled successfully!',
+            ]);
+        });
+    }
+
+    public function lock($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $event = Event::findOrFail($id);
+            if ($event) {
+                if (in_array($event->status, ['published', 'in_process'])) {
+                    $event->update([
+                        'status' => 'locked',
+                        // 'published_at' => now(),
+                    ]);
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Event Locked !'
+                    ]);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Cannot Lock Event !'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Not FOund !',
+                ], 500);
+            }
+        });
+    }
+
+    public function close($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $event = Event::findOrFail($id);
+            if ($event) {
+                if (in_array($event->status, ['locked'])) {
+                    $event->update([
+                        'status' => 'closed',
+                        'closed_at' => now(),
+                    ]);
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Event Closed !'
+                    ]);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Cannot Close Event !'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Not FOund !',
+                ], 500);
+            }
+        });
     }
 }

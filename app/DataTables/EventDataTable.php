@@ -57,10 +57,16 @@ class EventDataTable extends DataTable
                 if (isset($model->status)) {
                     switch ($model->status) {
                         case 'published':
-                            return '<span class="badge rounded-pill bg-label-success text-capitalize">published</span>';
+                            return '<span class="badge rounded-pill bg-label-secondary text-capitalize">published</span>';
                             break;
                         case 'pending':
                             return '<span class="badge rounded-pill bg-label-warning text-capitalize">pending</span>';
+                            break;
+                        case 'in_process':
+                            return '<span class="badge rounded-pill bg-label-primary text-capitalize">in process</span>';
+                            break;
+                        case 'locked':
+                            return '<span class="badge rounded-pill bg-label-info text-capitalize">Locked</span>';
                             break;
                         case 'closed':
                             return '<span class="badge rounded-pill bg-label-success text-capitalize">closed</span>';
@@ -77,7 +83,7 @@ class EventDataTable extends DataTable
             })
             ->editColumn('offers', function ($model) {
                 // if (count($model->eventPhotographers) > 0) {
-                    return '<a href="javascript:void(0)" onclick="listOffers(' . $model->id . ')">View</a>';
+                return '<a href="javascript:void(0)" onclick="listOffers(' . $model->id . ')">View</a>';
                 // } else {
                 //     return '<span class="text-muted">No Offers Yet</>';
                 // }
@@ -96,7 +102,7 @@ class EventDataTable extends DataTable
                 return Carbon::parse($model->created_at)->toDayDateTimeString();
             })
             ->editColumn('action', function ($model) {
-                return
+                return $model->status == 'closed' ? '-' :
                     // view('app.event.action', [
                     //     'model' => $model,
                     // ]);

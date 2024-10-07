@@ -109,6 +109,10 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::post('delete/{id}', [EventController::class, 'delete'])->name('delete');
         Route::post('publish/{id}', [EventController::class, 'publish'])->name('publish');
         Route::post('raise-offer/{id}', [EventController::class, 'raiseOffer'])->name('raise-offer');
+        Route::post('hire-photographer', [EventController::class, 'hirePhotographer'])->name('hire-photographer');
+        Route::post('cancel-photographer', [EventController::class, 'cancelPhotographer'])->name('cancel-photographer');
+        Route::post('lock/{id}', [EventController::class, 'lock'])->name('lock');
+        Route::post('close/{id}', [EventController::class, 'close'])->name('close');
 
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
             Route::post('details/{id}', [EventController::class, 'details'])->name('details');
