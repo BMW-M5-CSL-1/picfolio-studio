@@ -183,10 +183,21 @@
     </li>
 @endcan
 
+@can('schedule.index')
+    <li
+        class="menu-item {{ request()->routeIs('schedule.index') || request()->routeIs('schedule.index') ? 'active' : null }}">
+        <a class="menu-link" href="{{ route('schedule.index') }}">
+            <i class="ti ti-calendar-stats"></i>
+            <span class="ms-1 menu-title text-truncate">Schedule
+            </span>
+        </a>
+    </li>
+@endcan
+
 @can('profile.index')
     <li
         class="menu-item {{ request()->routeIs('profile.index') || request()->routeIs('profile.edit') ? 'active' : null }}">
-        <a class="menu-link" href="{{ route('profile.index') }}">
+        <a class="menu-link" href="{{ route('profile.index', ['id' => Auth::user()->id]) }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-user-circle"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                 fill="none" stroke-linecap="round" stroke-linejoin="round">

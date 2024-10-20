@@ -66,6 +66,23 @@
         })
     }
 
+    function fixTooltipIssue() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+            '[data-bs-toggle="tooltip"]'));
+
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+                trigger: 'hover'
+            });
+        });
+    }
+
+    $(document).ajaxStop(function() {
+        setTimeout(function() {
+            fixTooltipIssue();
+        }, 1500);
+    });
+
     // Pusher.logToConsole = true;
 
     // var pusher = new Pusher('9cc37d7ad5479dc34ceb', {

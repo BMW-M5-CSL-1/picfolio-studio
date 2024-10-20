@@ -88,12 +88,12 @@ Breadcrumbs::for('chat.index', function (BreadcrumbTrail $trail) {
 
 // Profile Breadcrumbs
 Breadcrumbs::for('profile.index', function (BreadcrumbTrail $trail) {
-    $trail->push('Profile', route('profile.index'));
+    $trail->push('Profile');
 });
 
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->push('Profile');
-    $trail->push('Edit Profile', route('profile.index'));
+    $trail->push('Edit Profile');
 });
 
 Breadcrumbs::for('event.index', function (BreadcrumbTrail $trail) {
@@ -111,4 +111,10 @@ Breadcrumbs::for('event.edit', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard');
     $trail->push('Event');
     $trail->push('Edit');
+});
+
+Breadcrumbs::for('schedule.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard');
+    $trail->push('Pages');
+    $trail->push('Schedule');
 });

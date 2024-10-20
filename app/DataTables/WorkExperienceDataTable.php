@@ -24,6 +24,7 @@ class WorkExperienceDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $columns = array_column($this->getColumns(), 'data');
         return (new EloquentDataTable($query))
             ->editColumn('name', function ($model) {
                 return $model->company_name ?? '-';
@@ -37,8 +38,17 @@ class WorkExperienceDataTable extends DataTable
             ->editColumn('action', function ($model) {
                 return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'work\')"><i class="ti ti-trash"></i></a>';
             })
+            ->editColumn('description', function ($model) {
+                if (strlen($model->description) > 20) {
+                    $span = '<span class="cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-primary"
+                        data-bs-title="' . $model->description . '">';
+                    return $span . substr($model->description, 0, 20) . ' ...</span>';
+                }
+                return $model->description ?? '-';
+            })
             ->addIndexColumn()
             ->addColumn('action', 'workexperience.action')
+            ->rawColumns(array_merge($columns, ['created_at', 'description']))
             ->setRowId('id');
     }
 
@@ -50,7 +60,7 @@ class WorkExperienceDataTable extends DataTable
      */
     public function query(WorkExperience $model): QueryBuilder
     {
-        return $model->newQuery()->where('user_id', Auth::id());
+        return $model->newQuery()->where('user_id', $this->user_id);
     }
 
     /**

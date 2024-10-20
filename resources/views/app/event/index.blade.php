@@ -689,6 +689,60 @@
             });
         }
 
+        function cancelEvent($id) {
+            Swal.fire({
+                title: "Cancel This Event !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Are You Sure ?",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('event.cancel', ['id' => ':id']) }}".replace(':id', $id);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            'id': $id,
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message ?? "Event Cancelled Successfully !", {
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    timeOut: 2e3,
+                                    closeButton: !0,
+                                    tapToDismiss: !1,
+                                });
+                                datatableCustomReload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message ?? 'Something Went Wrong !',
+                                });
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An Error Occured!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
         function listOffers($id) {
             let url = "{{ route('event.ajax-details', ['id' => ':id']) }}".replace(':id', $id);
             $.ajax({

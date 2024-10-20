@@ -286,7 +286,7 @@
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                     <a class="dropdown-item"
-                        href="{{ route('profile.index') }}">
+                        href="{{ route('profile.index', ['id' => Auth::id()]) }}">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
@@ -314,7 +314,7 @@
                 </li>
                 <li>
                     <a class="dropdown-item"
-                        href="{{ route('profile.index') }}">
+                        href="{{ route('profile.index', ['id' => Auth::id()]) }}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">My Profile</span>
                     </a>

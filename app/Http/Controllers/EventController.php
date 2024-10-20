@@ -67,6 +67,16 @@ class EventController extends Controller
         ]);
         // dd($request->all());
 
+        $overlap = Event::where('user_id', auth()->id())
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+                    ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+            })->exists();
+
+        if ($overlap) {
+            return redirect()->back()->with('error', 'You have an overlapping event.');
+        }
+
         DB::beginTransaction();
 
         try {
@@ -337,6 +347,9 @@ class EventController extends Controller
                 $event->update([
                     'status' => 'in_process'
                 ]);
+                $event->eventPhotographers()->where('status', 'applied')->update([
+                    'status' => 'cancelled',
+                ]);
             }
 
             return response()->json([
@@ -419,6 +432,37 @@ class EventController extends Controller
                     return response()->json([
                         'success' => false,
                         'message' => 'Cannot Close Event !'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Not FOund !',
+                ], 500);
+            }
+        });
+    }
+
+    public function cancel($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $event = Event::findOrFail($id);
+            if ($event) {
+                if (! in_array($event->status, ['cancelled', 'closed']) && $event->eventPhotographers()->where('status', 'hired')->count() == 0) {
+                    $event->update([
+                        'status' => 'cancelled',
+                    ]);
+                    $event->eventPhotographers()->where('status', 'applied')->update([
+                        'status' => 'cancelled',
+                    ]);
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Event Cancelled !'
+                    ]);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Cannot Cancel Event !'
                     ]);
                 }
             } else {

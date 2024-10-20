@@ -36,6 +36,9 @@ class EventDataTable extends DataTable
                 }
                 return $model->description ?? '-';
             })
+            ->editColumn('type', function ($model) {
+                return ucwords(str_replace('_', ' ', $model->title));
+            })
             ->editColumn('location', function ($model) {
                 if (strlen($model->location) > 20) {
                     $span = '<span class="cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-primary"
@@ -102,7 +105,7 @@ class EventDataTable extends DataTable
                 return Carbon::parse($model->created_at)->toDayDateTimeString();
             })
             ->editColumn('action', function ($model) {
-                return $model->status == 'closed' ? '-' :
+                return ($model->status == 'closed' || $model->status == 'cancelled') ? '-' :
                     // view('app.event.action', [
                     //     'model' => $model,
                     // ]);
@@ -133,7 +136,30 @@ class EventDataTable extends DataTable
      */
     public function query(Event $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('id', 'DESC');
+        $user = Auth::user();
+
+        $admin = $user->roles->where('slug', 'admin')->count() == 1;
+        $photographer = $user->roles->where('slug', 'photographer')->count() == 1;
+        $user_role = $user->roles->where('slug', 'user')->count() == 1;
+
+        $query = $model->newQuery();
+
+        if ($admin) {
+            $query = $query;
+        } elseif ($photographer) {
+            // Photographer sees only 'published' events and those where they are 'hired'
+            $query = $query->where(function ($q) use ($user) {
+                $q->where('status', 'published')
+                    ->orWhereHas('eventPhotographers', function ($qq) use ($user) {
+                        $qq->where('photographer_id', $user->id);
+                    });
+            });
+        } elseif ($user_role) {
+            // Regular user sees only their own events
+            $query = $query->where('user_id', $user->id);
+        }
+
+        return $query->orderBy('id', 'DESC');
     }
 
     /**
@@ -169,6 +195,7 @@ class EventDataTable extends DataTable
             ->processing(false)
             ->serverSide(true)
             ->scrollX()
+            ->scrollY('1000px')
             // ->fixedColumns()
             // ->fixedColumnsLeftColumns(2)
             ->searchDelay(900)

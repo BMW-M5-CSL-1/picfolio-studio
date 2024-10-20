@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StakeholderManagementController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
@@ -83,14 +84,14 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('index');
-        Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/{id}', [ProfileController::class, 'index'])->name('index');
+        Route::get('edit/{id}', [ProfileController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [ProfileController::class, 'update'])->name('update');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
             Route::post('portfolio/store', [PortfolioController::class, 'store'])->name('portfolio-store');
-            Route::get('show-work', [PortfolioController::class, 'showWork'])->name('show-work');
-            Route::get('show-project', [PortfolioController::class, 'showProject'])->name('show-project');
-            Route::get('show-certificate', [PortfolioController::class, 'showCertificate'])->name('show-certificate');
+            Route::get('show-work/{id}', [PortfolioController::class, 'showWork'])->name('show-work');
+            Route::get('show-project/{id}', [PortfolioController::class, 'showProject'])->name('show-project');
+            Route::get('show-certificate/{id}', [PortfolioController::class, 'showCertificate'])->name('show-certificate');
         });
         Route::post('portfolio/delete/{id}/{type}', [PortfolioController::class, 'delete'])->name('portfolio.delete');
 
@@ -113,10 +114,15 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::post('cancel-photographer', [EventController::class, 'cancelPhotographer'])->name('cancel-photographer');
         Route::post('lock/{id}', [EventController::class, 'lock'])->name('lock');
         Route::post('close/{id}', [EventController::class, 'close'])->name('close');
+        Route::post('cancel/{id}', [EventController::class, 'cancel'])->name('cancel');
 
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
             Route::post('details/{id}', [EventController::class, 'details'])->name('details');
         });
+    });
+
+    Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+        Route::get('/', [ScheduleController::class, 'getSchedule'])->name('index');
     });
 });
 

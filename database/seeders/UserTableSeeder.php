@@ -44,12 +44,12 @@ class UserTableSeeder extends Seeder
         }
 
         // Assigning Roles Statically to users
-        $user = User::find(2);
+        $user = User::find(3);
         $role = Role::find(2);
         $user->assignRole($role['id']);
 
-        $printer = User::find(3);
+        $photographer = User::find(2);
         $role = Role::find(3);
-        $printer->assignRole($role['id']);
+        $photographer->assignRole($role['id']);
     }
 }

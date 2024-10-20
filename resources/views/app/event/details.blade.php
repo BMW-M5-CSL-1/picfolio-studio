@@ -16,7 +16,11 @@
                     @forelse ($offers as $offer)
                         <tr>
                             <td scope="row">{{ $loop->iteration }}</td>
-                            <td>{{ $offer->photographer->name ?? '-' }}</td>
+                            <td>
+                                <a href="{{ route('profile.index', ['id' => $offer->photographer_id, 'only_view' => true]) }}" target="_blank">
+                                    {{ $offer->photographer->name ?? '-' }}
+                                </a>
+                            </td>
                             <td>{{ $offer->offer ?? '' }}/- Rs .</td>
                             <td>
                                 @switch($offer->status)
@@ -47,8 +51,8 @@
                                 @endif
 
                                 @if (
-                                    $offer->status == 'hired' &&
-                                        $event->status != 'locked' &&
+                                    !in_array($event->status, ['cancelled', 'locked', 'closed']) &&
+                                        !in_array($offer->status, ['hired', 'cancelled']) &&
                                         $event->eventPhotographers()->where('status', 'hired')->count() <= $event->required_photographers)
                                     <a href="javascript:void(0)" class="text-danger"
                                         onclick="cancelPhotographer({{ $offer->event_id }}, {{ $offer->photographer_id }}, '{{ $offer->photographer->name }}', {{ $offer->offer ?? 0 }})"

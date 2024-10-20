@@ -24,21 +24,31 @@ class CertificateEducationDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        $columns = array_column($this->getColumns(), 'data');
         return (new EloquentDataTable($query))
-        ->editColumn('name', function ($model) {
-            return $model->name ?? '-';
-        })
-        ->editColumn('column_2', function ($model) {
-            return $model->institution ?? '-';
-        })
-        ->editColumn('created_at', function ($model) {
-            return Carbon::parse($model->created_at)->toDayDateTimeString();
-        })
-        ->editColumn('action', function ($model) {
-            return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'certificate\')"><i class="ti ti-trash"></i></a>';
-        })
-        ->addIndexColumn()
-        ->addColumn('action', 'certificateeducation.action')
+            ->editColumn('name', function ($model) {
+                return $model->name ?? '-';
+            })
+            ->editColumn('column_2', function ($model) {
+                return $model->institution ?? '-';
+            })
+            ->editColumn('created_at', function ($model) {
+                return Carbon::parse($model->created_at)->toDayDateTimeString();
+            })
+            ->editColumn('action', function ($model) {
+                return '<a href="javascript:void(0)" onclick="deleteRecord(' . $model->id . ', \'certificate\')"><i class="ti ti-trash"></i></a>';
+            })
+            ->editColumn('description', function ($model) {
+                if (strlen($model->description) > 20) {
+                    $span = '<span class="cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-primary"
+                    data-bs-title="' . $model->description . '">';
+                    return $span . substr($model->description, 0, 20) . ' ...</span>';
+                }
+                return $model->description ?? '-';
+            })
+            ->addIndexColumn()
+            ->rawColumns(array_merge($columns, ['created_at', 'description']))
+            ->addColumn('action', 'certificateeducation.action')
             ->setRowId('id');
     }
 
@@ -50,7 +60,7 @@ class CertificateEducationDataTable extends DataTable
      */
     public function query(CertificateEducation $model): QueryBuilder
     {
-        return $model->newQuery()->where('user_id', Auth::id());
+        return $model->newQuery()->where('user_id', $this->user_id);
     }
 
     /**
@@ -61,20 +71,20 @@ class CertificateEducationDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('certificateeducation-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('certificateeducation-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -86,10 +96,10 @@ class CertificateEducationDataTable extends DataTable
     {
         return [
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('id'),
             Column::make('add your columns'),
             Column::make('created_at'),

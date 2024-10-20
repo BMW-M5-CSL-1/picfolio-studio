@@ -205,6 +205,19 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can Close Event',
                 'title' => 'Event',
             ],
+            [
+                'name' => 'event.cancel',
+                'guard_name' => 'web',
+                'show_name' => 'Can Cancel Event',
+                'title' => 'Event',
+            ],
+            // Schedule Permissions
+            [
+                'name' => 'schedule.index',
+                'guard_name' => 'web',
+                'show_name' => 'Can View Schedule',
+                'title' => 'Schedule',
+            ],
 
         ];
 

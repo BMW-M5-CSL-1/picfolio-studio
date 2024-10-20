@@ -63,7 +63,7 @@
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/front-page-landing.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/front-page-landing.css') }}" />
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
@@ -127,7 +127,7 @@
                         <li class="nav-item">
                             <a class="nav-link fw-medium" href="#landingContact">Contact us</a>
                         </li>
-                        <li class="nav-item mega-dropdown">
+                        {{-- <li class="nav-item mega-dropdown">
                             <a href="javascript:void(0);"
                                 class="nav-link dropdown-toggle navbar-ex-14-mega-dropdown mega-dropdown fw-medium"
                                 aria-expanded="false" data-bs-toggle="mega-dropdown" data-trigger="hover">
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
                         {{-- <li class="nav-item">
                             <a class="nav-link fw-medium" href="{{ asset('vertical-menu-template/index.html') }}"
                                 target="_blank">Admin</a>
@@ -357,6 +357,7 @@
         <!-- Hero: Start -->
         <section id="hero-animation">
             <div id="landingHero" class="section-py landing-hero position-relative">
+                <img src="{{ asset('assets/img/backgrounds/hero-bg.png') }}" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" />
                 <div class="container">
                     <div class="hero-text-box text-center">
                         <h1 class="text-primary hero-title  fw-bold">PicFolio Studio</h1>
@@ -941,7 +942,7 @@
         <!-- CTA: End -->
 
         <!-- Contact Us: Start -->
-        <section id="landingContact" class="section-py  bg-body landing-contact">
+        <section id="landingContact" class="section-py bg-body landing-contact">
             <div class="container">
                 <div class="text-center mb-3 pb-1">
                     <span class="badge bg-label-primary">Contact US</span>
@@ -1026,7 +1027,7 @@
     <!-- / Sections:End -->
 
     <!-- Footer: Start -->
-    <footer class="landing-footer  footer-text">
+    <footer class="landing-footer footer-text">
         <div class="footer-top">
             <div class="container">
                 <div class="row gx-0 gy-4 g-md-5">

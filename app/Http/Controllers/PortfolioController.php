@@ -81,19 +81,28 @@ class PortfolioController extends Controller
         });
     }
 
-    public function showProject(ProjectDataTable $table)
+    public function showProject($id, ProjectDataTable $table)
     {
-        return $table->ajax();
+        $data = [
+            'user_id' => $id,
+        ];
+        return $table->with($data)->ajax();
     }
 
-    public function showWork(WorkExperienceDataTable $table)
+    public function showWork($id, WorkExperienceDataTable $table)
     {
-        return $table->ajax();
+        $data = [
+            'user_id' => $id,
+        ];
+        return $table->with($data)->ajax();
     }
 
-    public function showCertificate(CertificateEducationDataTable $table)
+    public function showCertificate($id, CertificateEducationDataTable $table)
     {
-        return $table->ajax();
+        $data = [
+            'user_id' => $id,
+        ];
+        return $table->with($data)->ajax();
     }
 
     public function delete($id, $type)

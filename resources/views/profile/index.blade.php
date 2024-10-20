@@ -36,38 +36,40 @@
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                        <img src="{{ Auth::user()->profile_photo_url }}" alt="user image"
+                        <img src="{{ $user->profile_photo_url ?? '' }}" alt="user image"
                             class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                     </div>
                     <div class="flex-grow-1 mt-3 mt-sm-5">
                         <div
                             class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                             <div class="user-profile-info">
-                                <h4>{{ Auth::user()->name ?? '-' }}</h4>
+                                <h4>{{ $user->name ?? '-' }}</h4>
                                 <ul
                                     class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                                     <li class="list-inline-item">
                                         <i class='ti ti-shield-lock'></i>
-                                        @foreach (Auth::user()->roles as $role)
+                                        @foreach ($user->roles as $role)
                                             {{ $role->name }}
                                             {{ !($loop->first || $loop->last) ? ',' : null }}
                                         @endforeach
                                     </li>
-                                    @if (Auth::user()->country)
+                                    @if ($user->country)
                                         <li class="list-inline-item">
-                                            <i class='ti ti-map-pin'></i> {{ Auth::user()->country }}
+                                            <i class='ti ti-map-pin'></i> {{ $user->country }}
                                         </li>
                                     @endif
-                                    @if (Auth::user()->dob)
+                                    @if ($user->dob)
                                         <li class="list-inline-item">
-                                            <i class='ti ti-calendar'></i> {{ Auth::user()->dob }}
+                                            <i class='ti ti-calendar'></i> {{ $user->dob }}
                                         </li>
                                     @endif
                                 </ul>
                             </div>
-                            <a href="{{ route('profile.edit', ['id' => Auth::id()]) }}" class="btn btn-primary">
-                                <i class='ti ti-user-check me-1'></i> Edit
-                            </a>
+                            @if ($can_edit)
+                                <a href="{{ route('profile.edit', ['id' => Auth::id()]) }}" class="btn btn-primary">
+                                    <i class='ti ti-user-check me-1'></i> Edit
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -85,15 +87,15 @@
                     <small class="card-text text-uppercase">About</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-user"></i><span class="fw-bold mx-2">Full
-                                Name:</span> <span>{{ Auth::user()->name ?? '-' }}</span></li>
+                                Name:</span> <span>{{ $user->name ?? '-' }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-123"></i><span
-                                class="fw-bold mx-2">CNIC:</span> <span>{{ Auth::user()->cnic ?? '-' }}</span></li>
+                                class="fw-bold mx-2">CNIC:</span> <span>{{ $user->cnic ?? '-' }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-check"></i><span
                                 class="fw-bold mx-2">Status:</span> <span>Active</span></li>
                         <li class="d-block align-items-center mb-3"><i class="ti ti-shield-lock"></i><span
                                 class="fw-bold mx-2">Role:</span>
                             <ul>
-                                @foreach (Auth::user()->roles as $role)
+                                @foreach ($user->roles as $role)
                                     <li>
                                         {{ $role->name }}
                                         {{ !($loop->first || $loop->last) ? ',' : null }}
@@ -102,16 +104,16 @@
                             </ul>
                         </li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-flag"></i><span
-                                class="fw-bold mx-2">Country:</span> <span>{{ Auth::user()->country }}</span></li>
+                                class="fw-bold mx-2">Country:</span> <span>{{ $user->country }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-file-description"></i><span
                                 class="fw-bold mx-2">Languages:</span> <span>English</span></li>
                     </ul>
                     <small class="card-text text-uppercase">Contacts</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-phone-call"></i><span
-                                class="fw-bold mx-2">Contact:</span> <span>(+92) {{ Auth::user()->contact }}</span></li>
+                                class="fw-bold mx-2">Contact:</span> <span>(+92) {{ $user->contact }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="ti ti-mail"></i><span
-                                class="fw-bold mx-2">Email:</span> <span>{{ Auth::user()->email ?? '-' }}</span></li>
+                                class="fw-bold mx-2">Email:</span> <span>{{ $user->email ?? '-' }}</span></li>
                     </ul>
                     {{-- <small class="card-text text-uppercase">Teams</small>
                     <ul class="list-unstyled mb-0 mt-3">
@@ -132,12 +134,18 @@
                 <div class="card-body">
                     <p class="card-text text-uppercase">Overview</p>
                     <ul class="list-unstyled mb-0">
-                        <li class="d-flex align-items-center mb-3"><i class="ti ti-check"></i><span
-                                class="fw-bold mx-2">Total Projects:</span> <span>13.5k</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="ti ti-layout-grid"></i><span
-                                class="fw-bold mx-2">Completed Projects:</span> <span>146</span></li>
-                        <li class="d-flex align-items-center"><i class="ti ti-users"></i><span class="fw-bold mx-2">Pending
-                                Projects:</span> <span>11</span></li>
+                        <li class="d-flex align-items-center mb-3">
+                            <span class="fw-bold mx-2">Total Events:</span> <span>{{ $totalEvents }}</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                            <span class="fw-bold mx-2">Completed Events:</span> <span>{{ $completedEvents }}</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                            <span class="fw-bold mx-2">Pending Events:</span> <span>{{ $pendingEvents }}</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                            <span class="fw-bold mx-2">Cancelled Events:</span> <span>{{ $pendingEvents }}</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -282,21 +290,21 @@
             let url = null,
                 column2 = null;
             if (id == 'work_table') {
-                url = '{{ route('profile.ajax-show-work') }}';
+                url = '{{ route('profile.ajax-show-work', ['id' => $user->id]) }}';
                 column2 = 'Company Name';
                 if (!firstLoadWork) {
                     return false;
                 }
                 firstLoadWork = false;
             } else if (id == 'project_table') {
-                url = '{{ route('profile.ajax-show-project') }}';
+                url = '{{ route('profile.ajax-show-project', ['id' => $user->id]) }}';
                 column2 = 'Role';
                 if (!firstLoadProject) {
                     return false;
                 }
                 firstLoadProject = false;
             } else {
-                url = '{{ route('profile.ajax-show-certificate') }}';
+                url = '{{ route('profile.ajax-show-certificate', ['id' => $user->id]) }}';
                 column2 = 'Institution';
                 if (!firstLoadCertificate) {
                     return false;
