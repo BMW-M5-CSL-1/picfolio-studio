@@ -735,7 +735,6 @@
                 autoFocus: new FormValidation.plugins.AutoFocus()
             }
         }).on('core.form.valid', function() {
-            alert('submit')
         }).on('core.form.invalid', function(data) {
             console.log(data);
         });

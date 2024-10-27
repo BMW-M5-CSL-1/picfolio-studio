@@ -118,3 +118,23 @@ Breadcrumbs::for('schedule.index', function (BreadcrumbTrail $trail) {
     $trail->push('Pages');
     $trail->push('Schedule');
 });
+
+Breadcrumbs::for('product.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Inventory');
+    $trail->push('Product');
+});
+
+Breadcrumbs::for('product.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Inventory');
+    $trail->push('Product');
+    $trail->push('Create');
+});
+
+Breadcrumbs::for('product.edit', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Inventory');
+    $trail->push('Product');
+    $trail->push('Edit');
+});

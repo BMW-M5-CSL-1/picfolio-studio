@@ -138,9 +138,9 @@
                         </div>
                         <div class="text-sm-end text-center ps-sm-0">
                             <a href="#offcanvasAddUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
-                                <button class="btn btn-primary mb-2 text-nowrap add-new-role">Add New Stakeholder</button>
+                                <button class="btn btn-primary mb-2 text-nowrap add-new-role">Add New</button>
                             </a>
-                            <p class="mb-0 mt-1">Create New Stakeholder</p>
+                            <p class="mb-0 mt-1">Create New User</p>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
         <!-- Offcanvas to add new user -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
             <div class="offcanvas-header">
-                <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add Stakeholder</h5>
+                <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body mx-0 flex-grow-0">

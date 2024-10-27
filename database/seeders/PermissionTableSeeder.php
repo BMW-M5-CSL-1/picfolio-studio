@@ -218,6 +218,44 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can View Schedule',
                 'title' => 'Schedule',
             ],
+            // Inventory
+            // Product
+            [
+                'name' => 'product.index',
+                'guard_name' => 'web',
+                'show_name' => 'Can View Product',
+                'title' => 'Product',
+            ],
+            [
+                'name' => 'product.create',
+                'guard_name' => 'web',
+                'show_name' => 'Can Create Product',
+                'title' => 'Product',
+            ],
+            [
+                'name' => 'product.store',
+                'guard_name' => 'web',
+                'show_name' => 'Can Save Product',
+                'title' => 'Product',
+            ],
+            [
+                'name' => 'product.edit',
+                'guard_name' => 'web',
+                'show_name' => 'Can Edit Product',
+                'title' => 'Product',
+            ],
+            [
+                'name' => 'product.update',
+                'guard_name' => 'web',
+                'show_name' => 'Can Update Product',
+                'title' => 'Product',
+            ],
+            [
+                'name' => 'product.delete',
+                'guard_name' => 'web',
+                'show_name' => 'Can Delete Product',
+                'title' => 'Product',
+            ],
 
         ];
 

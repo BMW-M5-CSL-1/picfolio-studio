@@ -68,8 +68,8 @@
 @endif
 
 @can('stakeholders.index')
-    <li class="menu-item {{ request()->routeIs('stakeholders.index') ? 'active open' : null }}">
-        <a class="menu-link menu-toggle " href="javascript:void(0)">
+    <li class="menu-item {{ request()->routeIs('stakeholders.index') ? 'active' : null }}">
+        <a class="menu-link " href="{{ route('stakeholders.index') }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon icon-tabler icon-tabler-users-group"
                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -81,18 +81,8 @@
                 <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
                 <path d="M3 13v-1a2 2 0 0 1 2 -2h2"></path>
             </svg>
-            <span class="menu-title text-truncate">User Management
-            </span>
+            <span class="menu-title text-truncate">User Management</span>
         </a>
-        <ul class="menu-sub">
-            @can('stakeholders.index')
-                <li class="menu-item  {{ request()->routeIs('stakeholders.index') ? 'active' : null }}">
-                    <a class="menu-link" href="{{ route('stakeholders.index') }}">
-                        <span class="menu-title text-truncate">List</span>
-                    </a>
-                </li>
-            @endcan
-        </ul>
     </li>
 @endcan
 
@@ -158,6 +148,21 @@
     </a>
 </li>
 
+<li class="menu-header">
+    <span data-i18n="Marketplace">Inventory</span>
+</li>
+
+@canany(['product.index', 'product.create', 'product.store', 'product.edit', 'product.update',
+    'product.delete'])
+    <li class="menu-item
+    {{ request()->routeIs('product.*') ? 'active' : null }}
+        ">
+        <a class="menu-link" href="{{ route('product.index') }}">
+            <i class="icon menu-icon ti ti-photo"></i>
+            <span class="menu-title text-truncate">Products</span>
+        </a>
+    </li>
+@endcanany
 
 {{-- Chat --}}
 @canany(['chat.index', 'profile.index', 'profile.edit'])
