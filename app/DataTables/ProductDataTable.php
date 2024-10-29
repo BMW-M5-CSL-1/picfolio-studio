@@ -27,8 +27,18 @@ class ProductDataTable extends DataTable
         $columns = array_column($this->getColumns(), 'data');
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($model) {
-                $edit = '<a href="javascript:void(0)" onclick="editProduct(' . $model->id . ')"><i class="ti ti-edit"></i"></a>';
-                return $edit;
+                return  '<div class="d-flex justify-content-cetner align-items-center">
+                    <div class="btn-group">
+                        <button class="btn btn-flat-primary custom_dotted" type="button" id="dropdownMenuButton100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span><i class="ti ti-dots-vertical" style="font-size: 21px;"></i></span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton100" id="">
+                            <div id="dropDownMenu_">' . view('app.product.action', ['model' => $model,]) . '
+                            </div>
+                        </div>
+                    </div>
+                </div>';
             })
             ->editColumn('description', function ($model) {
                 if (strlen($model->description) > 20) {

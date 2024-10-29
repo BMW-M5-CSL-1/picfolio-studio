@@ -77,13 +77,80 @@
                 url: url,
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
-
                     $('#modalBody').html(response);
                     $('#detailsModal').modal('show');
                 },
                 error: function(xhr) {
                     alert('Failed to load product data.');
+                }
+            });
+        }
+
+        $(document).on('submit', '#editProductForm', function(e) {
+            e.preventDefault();
+
+            let form = $(document).find('#editProductForm');
+            let url = form.attr('action');
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: form.serialize(),
+                datatype: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        datatableCustomReload();
+                        toastr.success(response.message ?? 'Product Updated Successfully !')
+                    } else {
+                        toastr.error(response.message ?? 'Something Went Wrong !')
+                    }
+                    $('#detailsModal').modal('hide');
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                    toastr.error('An Error Occured !')
+                }
+            });
+        });
+
+        function confirmDelete(productId) {
+            Swal.fire({
+                title: "Delete !",
+                icon: 'question',
+                confirmButtonText: 'Proceed',
+                text: "Are you sure you want to delete this product ?",
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteProduct(productId);
+                }
+            });
+        }
+
+        function deleteProduct(productId) {
+            $.ajax({
+                url: "{{ route('product.delete', ['id' => ':id']) }}".replace(':id', productId),
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                datatype: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+                        datatableCustomReload();
+                    } else {
+                        toastr.warning('Failed to delete product!');
+                    }
+                },
+                error: function(xhr) {
+                    toastr.error('An error occurred while trying to delete the product.');
                 }
             });
         }

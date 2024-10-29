@@ -117,9 +117,28 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update($id, Request $request, Product $product)
     {
-        dd($request->all());
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'price' => 'required|numeric|min:0',
+                'stock' => 'required|integer|min:0',
+                'description' => 'nullable|string',
+            ]);
+            $product = $product->find($id);
+            if ($product) {
+                $product->update($request->all());
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Product updated successfully!'
+                ]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Failed to update product!'], 500);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete product!'], 500);
+        }
     }
 
     /**
@@ -128,8 +147,18 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id, Product $product)
     {
-        //
+        try {
+            $product = $product->find($id);
+            if ($product) {
+                $product->delete();
+                return response()->json(['success' => true, 'message' => 'Product deleted successfully!']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Failed to delete product!'], 500);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete product!'], 500);
+        }
     }
 }
