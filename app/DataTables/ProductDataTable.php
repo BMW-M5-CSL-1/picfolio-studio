@@ -27,7 +27,8 @@ class ProductDataTable extends DataTable
         $columns = array_column($this->getColumns(), 'data');
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($model) {
-                return '-';
+                $edit = '<a href="javascript:void(0)" onclick="editProduct(' . $model->id . ')"><i class="ti ti-edit"></i"></a>';
+                return $edit;
             })
             ->editColumn('description', function ($model) {
                 if (strlen($model->description) > 20) {

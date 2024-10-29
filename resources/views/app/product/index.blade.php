@@ -69,5 +69,23 @@
             let url = '{{ route('product.create') }}';
             location.href = url;
         }
+
+        function editProduct(productId) {
+            let url = '{{ route('product.edit', ['id' => ':id']) }}'.replace(':id', productId);
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+
+                    $('#modalBody').html(response);
+                    $('#detailsModal').modal('show');
+                },
+                error: function(xhr) {
+                    alert('Failed to load product data.');
+                }
+            });
+        }
     </script>
 @endsection

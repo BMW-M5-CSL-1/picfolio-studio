@@ -1,5 +1,5 @@
 <div class="card mb-3">
-    <h4 class="card-header">Event Details</h4>
+    <h4 class="card-header">Product Details</h4>
     <div class="card-body">
         <div class="row">
             <div class="col-4 mb-3">
