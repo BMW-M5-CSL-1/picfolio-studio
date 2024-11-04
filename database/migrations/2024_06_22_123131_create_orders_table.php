@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('orders');
+
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_no')->nullable();
+            $table->float('total')->nullable();
+            $table->string('status')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

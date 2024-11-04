@@ -138,12 +138,12 @@
 {{-- @endcanany --}}
 
 <li class="menu-item
-    {{ request()->routeIs('gallery.*') ? 'active' : null }}
+    {{ request()->routeIs('inventory.*') ? 'active' : null }}
         ">
-    <a class="menu-link" href="{{ route('gallery.index') }}">
+    <a class="menu-link" href="{{ route('inventory.index') }}">
         <i class="icon menu-icon ti ti-photo">
         </i>
-        <span class="menu-title text-truncate">Gallery
+        <span class="menu-title text-truncate">Inventory
         </span>
     </a>
 </li>

@@ -256,7 +256,12 @@ class PermissionTableSeeder extends Seeder
                 'show_name' => 'Can Delete Product',
                 'title' => 'Product',
             ],
-
+            [
+                'name' => 'inventory.index',
+                'guard_name' => 'web',
+                'show_name' => 'Can View Inventory',
+                'title' => 'Inventory',
+            ],
         ];
 
         foreach ($data as $permission) {

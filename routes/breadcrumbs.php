@@ -69,15 +69,9 @@ Breadcrumbs::for('booking.show', function (BreadcrumbTrail $trail) {
 });
 
 // Gallery Breadcrumbs
-Breadcrumbs::for('gallery.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('inventory.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Gallery', route('gallery.index'));
-});
-
-Breadcrumbs::for('gallery.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Gallery');
-    $trail->push('Create', route('gallery.create'));
+    $trail->push('Inventory', route('inventory.index'));
 });
 
 // Chat Breadcrumbs

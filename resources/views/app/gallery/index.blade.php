@@ -1,14 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('seo-breadcrumb')
-    <h4 class="fw-bold py-3 mb-4 ">
-        <span class="text-muted fw-light">
-            {{ Breadcrumbs::view('breadcrumbs::json-ld', 'gallery.index') }}
-        </span>
-    </h4>
-@endsection
-
-@section('title', 'Gallery')
+@section('title', 'Inventory')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
@@ -19,6 +11,9 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/ui-carousel.css') }}" />
+
 @endsection
 
 @section('page-style')
@@ -49,9 +44,9 @@
     <div class="content-header-left col-md-9 col-12">
         <div class="row breadcrumbs-top mb-0">
             <div class="col-12 align-items-center d-flex">
-                {{-- <h2 class="content-header-title float-start mb-0">Gallery</h2> --}}
+                {{-- <h2 class="content-header-title float-start mb-0">Inventory</h2> --}}
                 <div class="breadcrumb-wrapper align-items-center">
-                    {{ Breadcrumbs::render('gallery.index') }}
+                    {{ Breadcrumbs::render('inventory.index') }}
                 </div>
             </div>
         </div>
@@ -60,36 +55,71 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header header-elements">
-            {{-- <span class=" me-2">Card Header</span> --}}
+        {{-- <div class="card-header header-elements">
+            <span class=" me-2">Card Header</span>
 
             <div class="card-header-elements ms-auto">
                 <a href="{{ route('gallery.create') }}" type="button" class="btn btn-sm btn-primary"><span
                         class="tf-icon ti ti-plus ti-sm me-1"></span>Add</a>
             </div>
-        </div>
+        </div> --}}
         <div class="card-body">
             {{-- {{ $dataTable->table() }} --}}
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="{{ asset('assets/img/backgrounds/4.jpg') }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Photo description 1</p>
-                                <button class="btn btn-success btn-md btn-outline-success showPicDetails">Buy</button>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <span class="price">$100</span>
-                                <div class="avatar avatar-sm">
-                                    <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                        class="rounded-circle">
+                    @foreach ($products as $key => $product)
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <!-- Swiper Carousel for Product Images -->
+                                <div id="productCarousel{{ $key }}" class="swiper">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($product->getMedia('imgs') as $image)
+                                            <div class="swiper-slide">
+                                                <img src="{{ $image->getUrl() }}" class="card-img-top" alt="Product Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Optional Swiper Pagination & Navigation -->
+                                    <div class="swiper-pagination"></div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="card-text">{{ $product->description ?? '-' }}</p>
+                                    <button class="btn btn-success btn-md btn-outline-success showPicDetails">Buy</button>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <span class="price">{{ $product->price ?? 0 }}</span>
+                                    <div class="avatar avatar-sm">
+                                        <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
+                                            class="rounded-circle">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
+                    @endforeach
+
+                    {{-- @foreach ($products as $key => $product)
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ $product->getFirstMediaUrl('imgs') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">{{ $product->description ?? '-' }}</p>
+                                    <button class="btn btn-success btn-md btn-outline-success showPicDetails">Buy</button>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <span class="price">{{ $product->price ?? 0 }}</span>
+                                    <div class="avatar avatar-sm">
+                                        <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
+                                            class="rounded-circle">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach --}}
+                    {{-- <div class="col-md-4 mb-4">
                         <div class="card">
                             <img src="{{ asset('assets/img/backgrounds/6.jpg') }}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -136,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -162,8 +192,7 @@
                         <div class="card-footer d-flex justify-content-between align-items-center">
                             <span class="price">$200</span>
                             <div class="avatar avatar-sm">
-                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar"
-                                    class="rounded-circle">
+                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar" class="rounded-circle">
                             </div>
                         </div>
                     </div>
@@ -184,24 +213,30 @@
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
+    <script src="{{ asset('assets/js/ui-carousel.js') }}"></script>
+
 @endsection
 
 @section('page-script')
     {{-- {{ $dataTable->scripts() }} --}}
 
     <script>
-        // Variable declaration for table
-        var dt_user_table = $('.datatables-users'),
-            select2 = $('.select2'),
-            userView = baseUrl + 'app/user/view/account',
-            offCanvasForm = $('#offcanvasAddUser');
-
-        if (select2.length) {
-            var $this = select2;
-            $this.wrap('<div class="position-relative"></div>').select2({
-
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            @foreach ($products as $key => $product)
+                new Swiper('#productCarousel{{ $key }}', {
+                    slidesPerView: 1,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            @endforeach
+        });
 
         $(".showPicDetails").on('click', function() {
             $('#detailsModal').modal('show');
@@ -213,7 +248,7 @@
             $('#modalBody').html('');
             $.ajax({
                 type: "POST",
-                url: "{{ route('gallery.ajax-details') }}",
+                url: '',
                 data: {
                     id: id,
                     type: type,

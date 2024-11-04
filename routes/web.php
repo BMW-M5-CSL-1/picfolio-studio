@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
@@ -133,6 +134,15 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::post('update/{id}', [ProductController::class, 'update'])->name('update');
         Route::post('delete/{id}', [ProductController::class, 'destroy'])->name('delete');
     });
+
+    Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function () {
+        Route::get('/', [InventoryController::class, 'index'])->name('index');
+        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
+            Route::get('/details', function () {
+                return false;
+            })->name('details');
+        });
+    });
 });
 
 // Order
@@ -141,20 +151,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {});
-    });
-
-    Route::group(['prefix' => 'gallery', 'as' => 'gallery.'], function () {
-        Route::get('/', function () {
-            return view('app.gallery.index');
-        })->name('index');
-        Route::get('create', function () {
-            return view('app.gallery.create');
-        })->name('create');
-        Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
-            Route::get('/details', function () {
-                return false;
-            })->name('details');
-        });
     });
 });
 
