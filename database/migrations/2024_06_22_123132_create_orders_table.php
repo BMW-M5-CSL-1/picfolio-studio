@@ -18,10 +18,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_no')->nullable();
-            $table->float('total')->nullable();
+            $table->bigInteger('product_id')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->float('price')->nullable();
+            $table->float('total_price')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('user_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

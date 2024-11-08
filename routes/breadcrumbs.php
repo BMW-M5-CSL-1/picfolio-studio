@@ -39,34 +39,34 @@ Breadcrumbs::for('stakeholders.index', function (BreadcrumbTrail $trail) {
 });
 
 // Orders Breadcrumbs
-Breadcrumbs::for('booking.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('order.index', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Bookings', route('booking.index'));
+    $trail->push('Orders', route('order.index'));
 });
 
-Breadcrumbs::for('booking.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Booking');
-    $trail->push('Create', route('booking.create'));
-});
+// Breadcrumbs::for('booking.create', function (BreadcrumbTrail $trail) {
+//     $trail->parent('dashboard');
+//     $trail->push('Booking');
+//     $trail->push('Create', route('booking.create'));
+// });
 
-Breadcrumbs::for('booking.edit', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Booking');
-    $trail->push('Edit');
-});
+// Breadcrumbs::for('booking.edit', function (BreadcrumbTrail $trail) {
+//     $trail->parent('dashboard');
+//     $trail->push('Booking');
+//     $trail->push('Edit');
+// });
 
-Breadcrumbs::for('booking.trash', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Booking');
-    $trail->push('Trashed');
-});
+// Breadcrumbs::for('booking.trash', function (BreadcrumbTrail $trail) {
+//     $trail->parent('dashboard');
+//     $trail->push('Booking');
+//     $trail->push('Trashed');
+// });
 
-Breadcrumbs::for('booking.show', function (BreadcrumbTrail $trail) {
-    $trail->parent('dashboard');
-    $trail->push('Booking');
-    $trail->push('Preview');
-});
+// Breadcrumbs::for('booking.show', function (BreadcrumbTrail $trail) {
+//     $trail->parent('dashboard');
+//     $trail->push('Booking');
+//     $trail->push('Preview');
+// });
 
 // Gallery Breadcrumbs
 Breadcrumbs::for('inventory.index', function (BreadcrumbTrail $trail) {

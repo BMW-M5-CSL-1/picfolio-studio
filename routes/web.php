@@ -138,20 +138,23 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function () {
         Route::get('/', [InventoryController::class, 'index'])->name('index');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {
-            Route::get('/details', function () {
-                return false;
-            })->name('details');
+            Route::post('/details', [InventoryController::class, 'details'])->name('details');
         });
     });
 });
 
 // Order
 Route::group(['middleware' => ['auth']], function () {
-    Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
+    Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/create', [OrderController::class, 'create'])->name('create');
+        Route::post('store', [OrderController::class, 'store'])->name('store');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {});
     });
 });
+
+Route::get('/stripe-test/{order_id}', [OrderController::class, 'stripe'])->name('stripe.test');
+Route::get('payment/success/{order_id}', [OrderController::class, 'stripeSuccess'])->name('payment.success');
+Route::get('payment/cancel/{order_id}', [OrderController::class, 'stripeCancel'])->name('payment.cancel');
 
 require __DIR__ . '/auth.php';

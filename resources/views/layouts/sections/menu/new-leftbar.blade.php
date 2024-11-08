@@ -125,35 +125,34 @@
     </li>
 @endcan
 
-{{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
-{{-- <li class="menu-item
-    {{ request()->routeIs('booking.*') ? 'active' : null }}
-        ">
-    <a class="menu-link" href="{{ route('booking.index') }}">
-        <i class="icon menu-icon ti ti-shopping-cart"></i>
-        <span class="menu-title text-truncate">Booking
-        </span>
-    </a>
-</li> --}}
-{{-- @endcanany --}}
-
 <li class="menu-item
     {{ request()->routeIs('inventory.*') ? 'active' : null }}
         ">
     <a class="menu-link" href="{{ route('inventory.index') }}">
-        <i class="icon menu-icon ti ti-photo">
+        <i class="icon menu-icon ti ti-basket">
         </i>
-        <span class="menu-title text-truncate">Inventory
+        <span class="menu-title text-truncate">Store
         </span>
     </a>
 </li>
+
+{{-- @canany(['orders.index', 'orders.create', 'orders.show', 'orders.edit']) --}}
+<li class="menu-item
+    {{ request()->routeIs('order.*') ? 'active' : null }}
+        ">
+    <a class="menu-link" href="{{ route('order.index') }}">
+        <i class="icon menu-icon ti ti-shopping-cart"></i>
+        <span class="menu-title text-truncate">Order
+        </span>
+    </a>
+</li>
+{{-- @endcanany --}}
 
 <li class="menu-header">
     <span data-i18n="Marketplace">Inventory</span>
 </li>
 
-@canany(['product.index', 'product.create', 'product.store', 'product.edit', 'product.update',
-    'product.delete'])
+@canany(['product.index', 'product.create', 'product.store', 'product.edit', 'product.update', 'product.delete'])
     <li class="menu-item
     {{ request()->routeIs('product.*') ? 'active' : null }}
         ">

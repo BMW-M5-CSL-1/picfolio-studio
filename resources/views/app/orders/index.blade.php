@@ -1,13 +1,5 @@
 @extends('layouts/layoutMaster')
 
-@section('seo-breadcrumb')
-    <h4 class="fw-bold py-3 mb-4 ">
-        <span class="text-muted fw-light">
-            {{ Breadcrumbs::view('breadcrumbs::json-ld', 'booking.index') }}
-        </span>
-    </h4>
-@endsection
-
 @section('title', 'Booking')
 
 @section('vendor-style')
@@ -40,7 +32,7 @@
             <div class="col-12 align-items-center d-flex">
                 {{-- <h2 class="content-header-title float-start mb-0">Bookings</h2> --}}
                 <div class="breadcrumb-wrapper align-items-center">
-                    {{ Breadcrumbs::render('booking.index') }}
+                    {{ Breadcrumbs::render('order.index') }}
                 </div>
             </div>
         </div>
@@ -49,9 +41,9 @@
 
 @section('content')
 
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-header header-elements">
-            {{-- <span class=" me-2">Card Header</span> --}}
+            <span class=" me-2">Card Header</span>
 
             <div class="card-header-elements ms-auto">
                 <a href="{{ route('booking.create') }}" type="button" class="btn btn-sm btn-primary"><span
@@ -110,7 +102,7 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="row g-4 mb-4">
         <div class="col-sm-6 col-xl-3">
@@ -383,13 +375,13 @@
         </div>
     </div> --}}
 
-    {{-- <div class="card">
-        <div class="card-body"> --}}
-    {{-- <form action="#" id="design_form" method="get"> --}}
-    {{-- {{ $dataTable->table() }} --}}
-    {{-- </form> --}}
-    {{-- </div>
-    </div> --}}
+    <div class="card">
+        <div class="card-body">
+            {{-- <form action="#" id="design_form" method="get"> --}}
+            {{ $dataTable->table() }}
+            {{-- </form> --}}
+        </div>
+    </div>
 
     {{-- Modal for Details --}}
     <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
@@ -420,9 +412,12 @@
 @endsection
 
 @section('page-script')
-    {{-- {{ $dataTable->scripts() }} --}}
+    {{ $dataTable->scripts() }}
 
     <script>
+        function rejectOrder(id) {
+            alert('Working on it');
+        }
         // Variable declaration for table
         var dt_user_table = $('.datatables-users'),
             select2 = $('.select2'),

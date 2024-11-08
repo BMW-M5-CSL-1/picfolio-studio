@@ -88,14 +88,9 @@
 
                                 <div class="card-body">
                                     <p class="card-text">{{ $product->description ?? '-' }}</p>
-                                    <button class="btn btn-success btn-md btn-outline-success showPicDetails">Buy</button>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <span class="price">{{ $product->price ?? 0 }}</span>
-                                    <div class="avatar avatar-sm">
-                                        <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
+                                    <button class="btn btn-success btn-md btn-outline-success" type="button"
+                                        onclick="productDetails({{ $product->id }})">{{ $product->price ?? 0 }}
+                                        Rs.</button>
                                 </div>
                             </div>
                         </div>
@@ -182,20 +177,6 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-3 px-sm-3 pt-30" id="modalBody">
-                    <div class="card">
-                        <img width="50" src="assets/img/backgrounds/4.jpg" class="card-img-top modal-img"
-                            alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Photo description 4</p>
-                            <button class="btn btn-success btn-md btn-outline-success showPicDetails">Buy</button>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <span class="price">$200</span>
-                            <div class="avatar avatar-sm">
-                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar" class="rounded-circle">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -238,26 +219,44 @@
             @endforeach
         });
 
-        $(".showPicDetails").on('click', function() {
-            $('#detailsModal').modal('show');
-        })
-
-        $(document).on('click', '.detailsModal', function(e) {
-            id = $(this).data('id');
-            type = $(this).attr('data-modaltype');
-            $('#modalBody').html('');
+        function productDetails(id) {
             $.ajax({
                 type: "POST",
-                url: '',
+                url: "{{ route('inventory.ajax-details') }}",
                 data: {
-                    id: id,
-                    type: type,
+                    id: id
                 },
-                dataType: 'json',
+                dataType: "json",
                 success: function(response) {
-                    $('#modalBody').html(response.view);
+                    if (response.success) {
+                        $('#modalBody').html(response.view);
+
+                        new Swiper('#productCarouselModal', {
+                            loop: true,
+                            pagination: {
+                                el: '.swiper-pagination',
+                                clickable: true,
+                            },
+                            navigation: {
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                            },
+                        });
+
+                        $('#detailsModal').modal('show');
+                    } else {
+                        console.log(response);
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong!',
+                        });
+                    }
                 },
-                error: function(error) {
+                error: function(xhr) {
+                    console.log(xhr);
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -265,6 +264,112 @@
                     });
                 }
             });
-        });
+        }
+
+        function placeOrder() {
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            console.log("🚀 ~ placeOrder ~ quantity:", quantity)
+            const availableStock = parseInt(document.getElementById('availableStock').value, 10);
+
+            if (quantity > availableStock || !quantity) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Quantity',
+                    text: `Please enter a quantity less than or equal to ${availableStock}.`,
+                    customClass: {
+                        confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                        cancelButton: 'd-none btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                    }
+                });
+                return;
+            }
+
+            if (document.getElementById('delivery_address').value === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Address',
+                    text: `Please valid address to continue.`,
+                    customClass: {
+                        confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                        cancelButton: 'd-none btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                    }
+                });
+                return;
+            }
+
+            const formData = $('#orderForm').serialize();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('order.store') }}",
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Order Placed',
+                            text: 'Your order has been placed successfully!',
+                            customClass: {
+                                confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                                cancelButton: 'd-none btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                            }
+                        });
+                        $('#detailsModal').modal('hide');
+
+                        location.href = response.route;
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message || 'Could not place order.',
+                            customClass: {
+                                confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                                cancelButton: 'd-none btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong!',
+                        customClass: {
+                            confirmButton: 'd-none btn btn-outline-success waves-effect waves-float waves-light me-1',
+                            cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                        }
+                    });
+                }
+            });
+        }
+
+        // $(".showPicDetails").on('click', function() {
+        //     $('#detailsModal').modal('show');
+        // })
+
+        // $(document).on('click', '.detailsModal', function(e) {
+        //     id = $(this).data('id');
+        //     type = $(this).attr('data-modaltype');
+        //     $('#modalBody').html('');
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '',
+        //         data: {
+        //             id: id,
+        //             type: type,
+        //         },
+        //         dataType: 'json',
+        //         success: function(response) {
+        //             $('#modalBody').html(response.view);
+        //         },
+        //         error: function(error) {
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Error',
+        //                 text: 'Something went wrong!',
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endsection
