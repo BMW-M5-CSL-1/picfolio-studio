@@ -178,7 +178,7 @@ class OrderController extends Controller
             $order->product->decrement('stock', $order->quantity);
         });
 
-        return redirect()->route('dashboard')->with('success', 'Payment Successful !');
+        return redirect()->route('order.index')->with('success', 'Payment Successful !');
     }
 
     public function stripeCancel($order_id)
@@ -191,6 +191,6 @@ class OrderController extends Controller
             ]);
         });
 
-        return redirect()->route('dashboard')->with('Error', 'Payment Denied !');
+        return redirect()->route('order.index')->with('Error', 'Payment Denied !');
     }
 }
