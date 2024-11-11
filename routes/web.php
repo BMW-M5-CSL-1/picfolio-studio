@@ -147,8 +147,9 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
-        Route::get('/create', [OrderController::class, 'create'])->name('create');
+        Route::get('create', [OrderController::class, 'create'])->name('create');
         Route::post('store', [OrderController::class, 'store'])->name('store');
+        Route::post('cancel/{id}', [OrderController::class, 'cancel'])->name('cancel');
         Route::group(['prefix' => 'ajax', 'as' => 'ajax-'], function () {});
     });
 });

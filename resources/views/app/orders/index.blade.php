@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Booking')
+@section('title', 'Order')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
@@ -415,9 +415,94 @@
     {{ $dataTable->scripts() }}
 
     <script>
-        function rejectOrder(id) {
-            alert('Working on it');
+        function makePayment($id) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Are You Sure ?',
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes, Pay',
+                confirmButtonClass: 'btn-success',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                },
+                showLoaderOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('stripe.test', ['order_id' => ':id']) }}".replace(':id', $id);
+                    window.location.href = url;
+
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: url,
+                    //     data: {},
+                    //     dataType: "json",
+                    //     success: function(response) {
+                    //         if (response.success == true) {
+                    //             toastr.success(response.message);
+                    //             // location.href = response.route;
+                    //         }
+                    //     },
+                    //     error: function(error) {
+                    //         Swal.fire({
+                    //             icon: 'error',
+                    //             title: 'Error',
+                    //             text: 'Something went wrong!',
+                    //         });
+                    //     }
+                    // });
+                }
+            });
         }
+
+        function rejectOrder($id) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Are You Sure ?',
+                showCancelButton: true,
+                cancelButtonText: 'No, Cancel',
+                confirmButtonText: 'Yes',
+                confirmButtonClass: 'btn-success',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'btn btn-outline-success waves-effect waves-float waves-light me-1',
+                    cancelButton: 'btn btn-outline-danger waves-effect waves-float waves-light me-1'
+                },
+                showLoaderOnConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let url = "{{ route('order.cancel', ['id' => ':id']) }}".replace(':id', $id);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: {},
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success == true) {
+                                toastr.success(response.message);
+                                $('#order-table').DataTable().ajax.reload();
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Something went wrong!',
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function review($id) {
+
+        }
+
         // Variable declaration for table
         var dt_user_table = $('.datatables-users'),
             select2 = $('.select2'),

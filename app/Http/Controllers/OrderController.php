@@ -118,15 +118,26 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function cancel($id)
     {
-        //
+        // write code for order cancellation
+        $order = Order::find($id);
+        if (!$order) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+        return DB::transaction(function () use ($order) {
+            $order->update([
+                'status' => 'cancelled',
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Order cancelled successfully !']);
+        });
     }
 
     public function stripe($order_id)
     {
         $order = Order::find($order_id);
-        $amount = $order->total_price;
+        $amount = $order->price;
 
         Stripe::setApiKey(config('services.stripe.secret'));
         try {
@@ -150,10 +161,11 @@ class OrderController extends Controller
                         'currency' => 'pkr',
                         'product_data' => [
                             'name' => $order->product->name ?? '-',
+                            'description' => $order->product->description ?? '-',
                         ],
                         'unit_amount' => $amount * 100, // Amount in paisa for PKR
                     ],
-                    'quantity' => 1,
+                    'quantity' => $order->quantity,
                 ]],
                 'mode' => 'payment',
                 'success_url' => route('payment.success', ['order_id' => $order->id]),
@@ -187,7 +199,7 @@ class OrderController extends Controller
 
         DB::transaction(function () use ($order) {
             $order->update([
-                'status' => 'cancelled',
+                'status' => 'pending',
             ]);
         });
 

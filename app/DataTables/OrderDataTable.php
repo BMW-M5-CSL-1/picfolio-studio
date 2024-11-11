@@ -56,13 +56,16 @@ class OrderDataTable extends DataTable
                     } elseif ($order->status == 'paid') {
                         return '<span class="badge rounded-pill bg-label-success text-capitalize">paid</span>';
                     } elseif ($order->status == 'cancelled') {
-                        return '<span class="badge rounded-pill bg-label-danger text-capitalize">un paid</span>';
+                        return '<span class="badge rounded-pill bg-label-danger text-capitalize">Cancelled</span>';
                     } else {
                         return '-';
                     }
                 } else {
                     return '-';
                 }
+            })
+            ->editColumn('product_name', function ($order) {
+                return $order->product->name ?? '-';
             })
             // ->editColumn('created_by', function ($order) {
             //     $data =
@@ -98,7 +101,7 @@ class OrderDataTable extends DataTable
             //     }
             // })
             ->editColumn('action', function ($order) {
-                return  '<div class="d-flex justify-content-cetner align-items-center">
+                return $order->status != 'cancelled' ? '<div class="d-flex justify-content-cetner align-items-center">
                     <div class="btn-group">
                         <button class="btn btn-flat-primary custom_dotted" type="button" id="dropdownMenuButton100"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -109,7 +112,7 @@ class OrderDataTable extends DataTable
                             </div>
                         </div>
                     </div>
-                </div>';
+                </div>' : '-';
             })
             ->rawColumns(array_merge($columns, ['action', 'locations', 'primary_color', 'secondary_color']))
             ->setRowId('id');
@@ -174,7 +177,7 @@ class OrderDataTable extends DataTable
             //       ->addClass('text-center'),
             Column::computed('DT_RowIndex')->title('Sr. #')->addClass('text-nowrap')->orderable(false),
             Column::computed('order_no')->title('Order No#')->addClass('text-nowrap')->orderable(true)->searchable(true),
-            // Column::computed('comments')->title('Details')->addClass('text-nowrap')->orderable(false)->searchable(false),
+            Column::computed('product_name')->title('Product')->addClass('text-nowrap')->orderable(false)->searchable(false),
             Column::make('status')->title('status')->addClass('text-nowrap')->orderable(true)->searchable(true),
             Column::make('price')->title('Amount')->addClass('text-nowrap')->orderable(true)->searchable(true),
             Column::make('quantity')->title('quantity')->addClass('text-nowrap')->orderable(true)->searchable(true),
