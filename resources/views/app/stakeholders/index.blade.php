@@ -48,7 +48,7 @@
 
 @section('content')
     <div class="row g-4 mb-4">
-        <div class="col-sm-6 col-xl-4">
+        <div class="col-sm-6 col-xl-6">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-4">
+        {{-- <div class="col-sm-6 col-xl-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
@@ -75,7 +75,7 @@
                             <span>Verified Users</span>
                             <div class="d-flex align-items-end mt-2">
                                 <h3 class="mb-0 me-2">750</h3>
-                                {{-- <small class="text-success">(+95%)</small> --}}
+                                <small class="text-success">(+95%)</small>
                             </div>
                             <small>Recent analytics </small>
                         </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- <div class="col-sm-6 col-xl-4">
             <div class="card">
                 <div class="card-body">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div> --}}
-        <div class="col-sm-6 col-xl-4">
+        <div class="col-sm-6 col-xl-6">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
