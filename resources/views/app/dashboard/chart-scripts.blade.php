@@ -43,7 +43,7 @@
         const revenueGeneratedEl = document.querySelector('#revenueGenerated'),
             revenueGeneratedConfig = {
                 chart: {
-                    height: 130,
+                    height: {{ $revenue > 0 ? 130 : 50 }},
                     type: 'area',
                     parentHeightOffset: 0,
                     toolbar: {

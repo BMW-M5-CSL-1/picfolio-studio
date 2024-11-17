@@ -125,8 +125,9 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $order): QueryBuilder
     {
-        $user = Auth::user()->roles->where('slug', 'super_admin');
-        if (count($user) == 1) {
+        $user = Auth::user();
+        $admin = $user->roles->where('slug', 'admin')->count() == 1;
+        if ($admin) {
             return $order->newQuery()->with('user')->orderBy('id', 'desc');
         } else {
             return $order->newQuery()->with('user')->where('user_id', Auth::user()->id)->orderBy('id', 'desc');

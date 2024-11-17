@@ -116,7 +116,7 @@
                         </span>
                     </div>
                     <h5 class="card-title mb-0 mt-2">Rs. {{ $revenue ?? 0 }}/-</h5>
-                    <small>{{ count(Auth::user()->roles->where('slug', 'user')) > 0 ? 'Total Expense' : 'Revenue Generated' }}</small>
+                    <small>{{ $admin ? 'Revenue' : 'Expense' }}</small>
                 </div>
                 <div id="revenueGenerated"></div>
             </div>
@@ -134,6 +134,73 @@
                 </div>
                 <div class="card-body">
                     <div id="donutChartOrder"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <small class="d-block mb-1 text-muted">Total Events</small>
+                        <p class="card-text text-success">100%</p>
+                    </div>
+                    <h4 class="card-title mb-1">{{ $totalOrders ?? 0 }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="d-flex gap-2 align-items-center mb-2">
+                                <span class="badge bg-label-success p-1 rounded"><i
+                                        class="ti ti-shopping-cart ti-xs"></i></span>
+                                <p class="mb-0">Completed</p>
+                            </div>
+                            <h5 class="mb-0 pt-1 text-nowrap text-success">
+                                {{ $completedOrders ?? 0 }}
+                            </h5>
+                            <small class="text-muted">Completed</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="divider divider-vertical">
+                                <div class="divider-text">
+                                    <span class="badge-divider-bg bg-label-secondary">VS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
+                                <p class="mb-0">Pending</p>
+                                <span class="badge bg-label-warning p-1 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-shopping-cart-exclamation" width="20"
+                                        height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                        <path d="M15 17h-9v-14h-2" />
+                                        <path d="M6 5l14 1l-.854 5.976m-2.646 1.024h-10.5" />
+                                        <path d="M19 16v3" />
+                                        <path d="M19 22v.01" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0 text-warning">{{ $pendingOrders ?? 0 }}</h5>
+                            <small class="text-muted">Pending</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="progress w-100" style="height: 8px;">
+                            <div class="progress-bar bg-success" {{-- @if (count(Auth::user()->roles->where('slug', 'super_admin')) > 0)
+                                style="width: {{ isset($completed_orders) ? ($completed_orders < 10 ? $completed_orders * 10 : $completed_orders) : 0 }}%"
+                                @else --}} style="width: 50%"
+                                {{-- @endif --}} role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" {{-- @if (count(Auth::user()->roles->where('slug', 'super_admin')) > 0) style="width: {{ isset($pending_orders) ? ($pending_orders < 10 ? $pending_orders * 10 : $pending_orders) : 0 }}%"
+                                @else --}}
+                                style="width: 50%" {{-- @endif --}} aria-valuenow="30" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

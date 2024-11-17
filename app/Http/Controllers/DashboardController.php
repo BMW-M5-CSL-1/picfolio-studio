@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $admin = $user->roles->where('slug', 'admin')->count() == 1;
         $photographer = $user->roles->where('slug', 'photographer')->count() == 1;
-        $user_role = $user->roles->where('slug', 'user')->count() == 1;
+        $userRole = $user->roles->where('slug', 'user')->count() == 1;
 
         $orders = Order::query();
 
@@ -38,7 +38,7 @@ class DashboardController extends Controller
             $cancelledOrder = Order::where('status', 'cancelled')->count() ?? 0;
         }
 
-        if ($photographer || $user) {
+        if ($photographer || $userRole) {
             $totalOrders = $orders->clone()->where('user_id', Auth::id())->count();
             $pendingOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'pending')->count();
             $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
@@ -57,6 +57,7 @@ class DashboardController extends Controller
             'paidOrder' => $paidOrder ?? 0,
             'unPaidOrder' => $unPaidOrder ?? 0,
             'cancelledOrder' => $cancelledOrder ?? 0,
+            'admin' => $admin,
         ];
         // dd($data['orders_graph']);
         return view('app.dashboard.dashboards', $data);
