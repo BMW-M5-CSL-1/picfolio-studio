@@ -172,7 +172,6 @@
         }
 
         // Order Chart
-        @canany(['orders.index', 'orders.create', 'orders.edit', 'orders.update', 'orders.store'])
             // Donut Chart
             const donutChartOrderEl = document.querySelector('#donutChartOrder'),
                 donutChartOrderConfig = {
@@ -180,10 +179,8 @@
                         height: 340,
                         type: 'donut'
                     },
-                    labels: ['Pending', 'Partial-Paid', 'Paid', 'Completed'],
-                    series: [{!! $pending_orders !!}, {!! $partial_paid_orders !!}, {!! $paid_orders !!},
-                        {!! $completed_orders !!}
-                    ],
+                    labels: ['Pending', 'Cancelled', 'Paid'],
+                    series: [{!! $pendingOrders !!}, {!! $cancelledOrder !!}, {!! $paidOrder !!}],
                     colors: [
                         chartColors.donut.series1,
                         chartColors.donut.series4,
@@ -236,14 +233,14 @@
                                         show: true,
                                         fontSize: '1.5rem',
                                         color: headingColor,
-                                        label: @if ($total_orders > 0)
+                                        label: @if ($totalOrders > 0)
                                             'Orders'
                                         @else
                                             'No Orders'
                                         @endif ,
                                         formatter: function(w) {
                                             return
-                                            @if ($total_orders > 0)
+                                            @if ($totalOrders > 0)
                                                 '100%'
                                             @else
                                                 '0%'
@@ -333,108 +330,107 @@
             // --------------------------------------------------------------------
 
             // Order Payment Tracker
-            const orderPaymentTrackerEl = document.querySelector('#orderPaymentTracker'),
-                orderPaymentTrackerOptions = {
-                    series: [{!! isset($paid_orders) ? number_format(($paid_orders / ($total_orders > 0 ? $total_orders : 1)) * 100, 1) : 0 !!}],
-                    labels: [
-                        @if ($total_orders > 0)
-                            'Full Paid Orders'
-                        @else
-                            'No Orders'
-                        @endif
-                    ],
-                    chart: {
-                        height: 395,
-                        type: 'radialBar'
-                    },
-                    plotOptions: {
-                        radialBar: {
-                            offsetY: 10,
-                            startAngle: -140,
-                            endAngle: 130,
-                            hollow: {
-                                size: '65%'
-                            },
-                            track: {
-                                background: cardColor,
-                                strokeWidth: '100%'
-                            },
-                            dataLabels: {
-                                name: {
-                                    offsetY: -20,
-                                    color: labelColor,
-                                    fontSize: '13px',
-                                    fontWeight: '400',
-                                    fontFamily: 'Public Sans'
-                                },
-                                value: {
-                                    offsetY: 10,
-                                    color: headingColor,
-                                    fontSize: '38px',
-                                    fontWeight: '600',
-                                    fontFamily: 'Public Sans'
-                                }
-                            }
-                        }
-                    },
-                    colors: [config.colors.primary],
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shade: 'dark',
-                            shadeIntensity: 0.5,
-                            gradientToColors: [config.colors.primary],
-                            inverseColors: true,
-                            opacityFrom: 1,
-                            opacityTo: 0.6,
-                            stops: [30, 70, 100]
-                        }
-                    },
-                    stroke: {
-                        dashArray: 10
-                    },
-                    grid: {
-                        padding: {
-                            top: -20,
-                            bottom: 5
-                        }
-                    },
-                    states: {
-                        hover: {
-                            filter: {
-                                type: 'none'
-                            }
-                        },
-                        active: {
-                            filter: {
-                                type: 'none'
-                            }
-                        }
-                    },
-                    responsive: [{
-                            breakpoint: 1025,
-                            options: {
-                                chart: {
-                                    height: 330
-                                }
-                            }
-                        },
-                        {
-                            breakpoint: 769,
-                            options: {
-                                chart: {
-                                    height: 280
-                                }
-                            }
-                        }
-                    ]
-                };
-            if (typeof orderPaymentTrackerEl !== undefined && orderPaymentTrackerEl !== null) {
-                const orderPaymentTracker = new ApexCharts(orderPaymentTrackerEl, orderPaymentTrackerOptions);
-                orderPaymentTracker.render();
-            }
+            // const orderPaymentTrackerEl = document.querySelector('#orderPaymentTracker'),
+            //     orderPaymentTrackerOptions = {
+            //         series: [{!! isset($paid_orders) ? number_format(($paid_orders / ($totalOrders > 0 ? $totalOrders : 1)) * 100, 1) : 0 !!}],
+            //         labels: [
+            //             @if ($totalOrders > 0)
+            //                 'Full Paid Orders'
+            //             @else
+            //                 'No Orders'
+            //             @endif
+            //         ],
+            //         chart: {
+            //             height: 395,
+            //             type: 'radialBar'
+            //         },
+            //         plotOptions: {
+            //             radialBar: {
+            //                 offsetY: 10,
+            //                 startAngle: -140,
+            //                 endAngle: 130,
+            //                 hollow: {
+            //                     size: '65%'
+            //                 },
+            //                 track: {
+            //                     background: cardColor,
+            //                     strokeWidth: '100%'
+            //                 },
+            //                 dataLabels: {
+            //                     name: {
+            //                         offsetY: -20,
+            //                         color: labelColor,
+            //                         fontSize: '13px',
+            //                         fontWeight: '400',
+            //                         fontFamily: 'Public Sans'
+            //                     },
+            //                     value: {
+            //                         offsetY: 10,
+            //                         color: headingColor,
+            //                         fontSize: '38px',
+            //                         fontWeight: '600',
+            //                         fontFamily: 'Public Sans'
+            //                     }
+            //                 }
+            //             }
+            //         },
+            //         colors: [config.colors.primary],
+            //         fill: {
+            //             type: 'gradient',
+            //             gradient: {
+            //                 shade: 'dark',
+            //                 shadeIntensity: 0.5,
+            //                 gradientToColors: [config.colors.primary],
+            //                 inverseColors: true,
+            //                 opacityFrom: 1,
+            //                 opacityTo: 0.6,
+            //                 stops: [30, 70, 100]
+            //             }
+            //         },
+            //         stroke: {
+            //             dashArray: 10
+            //         },
+            //         grid: {
+            //             padding: {
+            //                 top: -20,
+            //                 bottom: 5
+            //             }
+            //         },
+            //         states: {
+            //             hover: {
+            //                 filter: {
+            //                     type: 'none'
+            //                 }
+            //             },
+            //             active: {
+            //                 filter: {
+            //                     type: 'none'
+            //                 }
+            //             }
+            //         },
+            //         responsive: [{
+            //                 breakpoint: 1025,
+            //                 options: {
+            //                     chart: {
+            //                         height: 330
+            //                     }
+            //                 }
+            //             },
+            //             {
+            //                 breakpoint: 769,
+            //                 options: {
+            //                     chart: {
+            //                         height: 280
+            //                     }
+            //                 }
+            //             }
+            //         ]
+            //     };
+            // if (typeof orderPaymentTrackerEl !== undefined && orderPaymentTrackerEl !== null) {
+            //     const orderPaymentTracker = new ApexCharts(orderPaymentTrackerEl, orderPaymentTrackerOptions);
+            //     orderPaymentTracker.render();
+            // }
             // --------------------------------------------------------------------
-        @endcanany
 
         // Printing Chart
         @canany(['printing-press.index', 'printing-press.ajax-paid-order', 'printing-press.ajax-partial-paid-order'])

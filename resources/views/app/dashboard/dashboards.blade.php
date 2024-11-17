@@ -46,7 +46,7 @@
                         <small class="d-block mb-1 text-muted">Total Orders</small>
                         <p class="card-text text-success">100%</p>
                     </div>
-                    <h4 class="card-title mb-1">{{ $total_orders ?? 0 }}</h4>
+                    <h4 class="card-title mb-1">{{ $totalOrders ?? 0 }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -57,11 +57,9 @@
                                 <p class="mb-0">Completed</p>
                             </div>
                             <h5 class="mb-0 pt-1 text-nowrap text-success">
-                                
-                                    0
-                                
+                                {{ $completedOrders ?? 0 }}
                             </h5>
-                            <small class="text-muted">Delivered</small>
+                            <small class="text-muted">Completed</small>
                         </div>
                         <div class="col-4">
                             <div class="divider divider-vertical">
@@ -87,24 +85,19 @@
                                     </svg>
                                 </span>
                             </div>
-                            <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0 text-warning">
-                               
-                                    0
-                            </h5>
-                            <small class="text-muted">In Process</small>
+                            <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0 text-warning">{{ $pendingOrders ?? 0 }}</h5>
+                            <small class="text-muted">Pending</small>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mt-4">
                         <div class="progress w-100" style="height: 8px;">
                             <div class="progress-bar bg-success" {{-- @if (count(Auth::user()->roles->where('slug', 'super_admin')) > 0)
                                 style="width: {{ isset($completed_orders) ? ($completed_orders < 10 ? $completed_orders * 10 : $completed_orders) : 0 }}%"
-                                @else --}}
-                                style="width: 50%"
+                                @else --}} style="width: 50%"
                                 {{-- @endif --}} role="progressbar" aria-valuenow="70" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                             <div class="progress-bar bg-warning" role="progressbar" {{-- @if (count(Auth::user()->roles->where('slug', 'super_admin')) > 0) style="width: {{ isset($pending_orders) ? ($pending_orders < 10 ? $pending_orders * 10 : $pending_orders) : 0 }}%"
-                                @else --}}
-                                style="width: 50%"
+                                @else --}} style="width: 50%"
                                 {{-- @endif --}} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -122,7 +115,7 @@
                             <i class='ti ti-credit-card ti-sm'></i>
                         </span>
                     </div>
-                    <h5 class="card-title mb-0 mt-2">Rs. 10000/-</h5>
+                    <h5 class="card-title mb-0 mt-2">Rs. {{ $revenue ?? 0 }}/-</h5>
                     <small>{{ count(Auth::user()->roles->where('slug', 'user')) > 0 ? 'Total Expense' : 'Revenue Generated' }}</small>
                 </div>
                 <div id="revenueGenerated"></div>
@@ -164,7 +157,7 @@
         <!-- /Radial bar Chart -->
 
         {{-- For Order --}}
-        @canany(['orders.index', 'orders.create', 'orders.edit', 'orders.update', 'orders.store'])
+        {{-- @canany(['orders.index', 'orders.create', 'orders.edit', 'orders.update', 'orders.store']) --}}
             <!-- Order Donut Chart -->
             <div class="col-md-6 col-12 mb-4">
                 <div class="card">
@@ -201,7 +194,7 @@
                 </div>
             </div>
             <!-- /Order Donut Chart -->
-
+            {{--
             <!-- Order Payment Tracker -->
             <div class="col-md-6 mb-4">
                 <div class="card">
@@ -210,16 +203,6 @@
                             <h5 class="mb-0">Payments</h5>
                             <small class="text-muted">Orders Payment Statistics.</small>
                         </div>
-                        {{-- <div class="dropdown">
-                        <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div> --}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -297,8 +280,8 @@
                     </div>
                 </div>
             </div>
-            <!--/ Order Payment Tracker -->
-        @endcanany
+            <!--/ Order Payment Tracker --> --}}
+        {{-- @endcanany --}}
 
         {{-- For Printing --}}
         @canany(['printing-press.index', 'printing-press.ajax-paid-order', 'printing-press.ajax-partial-paid-order'])
