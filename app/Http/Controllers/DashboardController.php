@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Distribution;
 use App\Models\DistributionUser;
+use App\Models\Event;
 use App\Models\Order;
 use App\Models\PrintingPress;
 use App\Models\VehicleMedia;
@@ -26,6 +27,7 @@ class DashboardController extends Controller
         $userRole = $user->roles->where('slug', 'user')->count() == 1;
 
         $orders = Order::query();
+        $events = Event::query()->with('eventPhotographers');
 
         if ($admin) {
             $totalOrders = $orders->clone()->count();
@@ -36,9 +38,14 @@ class DashboardController extends Controller
             $paidOrder = Order::where('status', 'paid')->count() ?? 0;
             $unPaidOrder = Order::where('status', 'partial_paid')->count() ?? 0;
             $cancelledOrder = Order::where('status', 'cancelled')->count() ?? 0;
-        }
 
-        if ($photographer || $userRole) {
+            $totalEvents = $events->clone()->count();
+            $completedEvents = $events->clone()->where('status', 'closed')->count();
+            $pendingEvents = $events->clone()->whereNotIn('status', ['closed', 'cancelled'])->count();
+            $cancelledEvents = $events->clone()->where('status', 'cancelled')->count();
+
+            // $closedEvents = $events->clone()->where
+        } elseif ($photographer) {
             $totalOrders = $orders->clone()->where('user_id', Auth::id())->count();
             $pendingOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'pending')->count();
             $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
@@ -47,7 +54,36 @@ class DashboardController extends Controller
             $paidOrder = Order::where('user_id', Auth::id())->where('status', 'paid')->count() ?? 0;
             $unPaidOrder = Order::where('user_id', Auth::id())->where('status', 'partial_paid')->count() ?? 0;
             $cancelledOrder = Order::where('user_id', Auth::id())->where('status', 'cancelled')->count() ?? 0;
+
+            $totalEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
+            $completedEvents = $events->clone()->where('status', 'closed')->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
+            $pendingEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->whereNotIn('status', ['closed', 'cancelled'])->count();
+            $cancelledEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'cancelled')->count();
+
+            $assignedEvents = $events->clone()->whereHas('eventPhotographers', function ($query) {
+                $query->where('photographer_id', Auth::id());
+            });
+
+            $totalEvents = $assignedEvents->clone()->count();
+            $completedEvents = $assignedEvents->clone()->where('status', 'closed')->count();
+            $pendingEvents = $assignedEvents->clone()->whereNotIn('status', ['closed', 'cancelled'])->count();
+            $cancelledEvents = $assignedEvents->clone()->where('status', 'cancelled')->count();
+        } elseif ($userRole) {
+            $totalOrders = $orders->clone()->where('user_id', Auth::id())->count();
+            $pendingOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'pending')->count();
+            $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
+            $revenue = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->sum('total_price');
+
+            $paidOrder = Order::where('user_id', Auth::id())->where('status', 'paid')->count() ?? 0;
+            $unPaidOrder = Order::where('user_id', Auth::id())->where('status', 'partial_paid')->count() ?? 0;
+            $cancelledOrder = Order::where('user_id', Auth::id())->where('status', 'cancelled')->count() ?? 0;
+
+            $totalEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
+            $completedEvents = $events->clone()->where('status', 'closed')->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
+            $pendingEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->whereNotIn('status', ['closed', 'cancelled'])->count();
+            $cancelledEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'cancelled')->count();
         }
+
 
         $data = [
             'totalOrders' => $totalOrders ?? 0,
@@ -58,6 +94,10 @@ class DashboardController extends Controller
             'unPaidOrder' => $unPaidOrder ?? 0,
             'cancelledOrder' => $cancelledOrder ?? 0,
             'admin' => $admin,
+            'totalEvents' => $totalEvents ?? 0,
+            'completedEvents' => $completedEvents ?? 0,
+            'pendingEvents' => $pendingEvents ?? 0,
+            'cancelledEvents' => $cancelledEvents ?? 0,
         ];
         // dd($data['orders_graph']);
         return view('app.dashboard.dashboards', $data);
