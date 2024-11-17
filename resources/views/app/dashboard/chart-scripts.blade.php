@@ -162,7 +162,7 @@
                     type: 'donut'
                 },
                 labels: ['Pending', 'Completed', 'Cancelled'],
-                series: [{!! $pendingOrders !!}, {!! $cancelledOrder !!}, {!! $paidOrder !!}],
+                series: [{!! $pendingOrders !!}, {!! $completedOrders !!}, {!! $cancelledOrder !!}],
                 colors: [
                     chartColors.donut.series1,
                     chartColors.donut.series5,

@@ -35,8 +35,6 @@ class DashboardController extends Controller
             $completedOrders = $orders->clone()->where('status', 'paid')->count();
             $revenue = $orders->clone()->where('status', 'paid')->sum('total_price');
 
-            $paidOrder = Order::where('status', 'paid')->count() ?? 0;
-            $unPaidOrder = Order::where('status', 'partial_paid')->count() ?? 0;
             $cancelledOrder = Order::where('status', 'cancelled')->count() ?? 0;
 
             $totalEvents = $events->clone()->count();
@@ -51,8 +49,6 @@ class DashboardController extends Controller
             $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
             $revenue = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->sum('total_price');
 
-            $paidOrder = Order::where('user_id', Auth::id())->where('status', 'paid')->count() ?? 0;
-            $unPaidOrder = Order::where('user_id', Auth::id())->where('status', 'partial_paid')->count() ?? 0;
             $cancelledOrder = Order::where('user_id', Auth::id())->where('status', 'cancelled')->count() ?? 0;
 
             $totalEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
@@ -74,8 +70,6 @@ class DashboardController extends Controller
             $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
             $revenue = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->sum('total_price');
 
-            $paidOrder = Order::where('user_id', Auth::id())->where('status', 'paid')->count() ?? 0;
-            $unPaidOrder = Order::where('user_id', Auth::id())->where('status', 'partial_paid')->count() ?? 0;
             $cancelledOrder = Order::where('user_id', Auth::id())->where('status', 'cancelled')->count() ?? 0;
 
             $totalEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'partial_paid')->count();
@@ -90,8 +84,6 @@ class DashboardController extends Controller
             'pendingOrders' => $pendingOrders ?? 0,
             'completedOrders' => $completedOrders ?? 0,
             'revenue' => $revenue ?? 0,
-            'paidOrder' => $paidOrder ?? 0,
-            'unPaidOrder' => $unPaidOrder ?? 0,
             'cancelledOrder' => $cancelledOrder ?? 0,
             'admin' => $admin,
             'totalEvents' => $totalEvents ?? 0,
