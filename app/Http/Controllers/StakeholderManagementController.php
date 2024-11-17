@@ -114,11 +114,11 @@ class StakeholderManagementController extends Controller
                 foreach ($roles as $role) {
                     $record->assignRole($role);
                 }
-                if (!is_null($routes)) {
-                    foreach ($routes as $route) {
-                        $record->routes()->attach($route);
-                    }
-                }
+                // if (!is_null($routes)) {
+                //     foreach ($routes as $route) {
+                //         $record->routes()->attach($route);
+                //     }
+                // }
             });
             return redirect()->route('stakeholders.index')->withSuccess('Data Saved');
         } catch (\Exception $ex) {
@@ -132,7 +132,7 @@ class StakeholderManagementController extends Controller
      * @param  \App\Models\StakeholderManagement  $stakeholderManagement
      * @return \Illuminate\Http\Response
      */
-    public function show(StakeholderManagement $stakeholderManagement)
+    public function show(Request $stakeholderManagement)
     {
         //
     }
