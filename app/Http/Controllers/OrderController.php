@@ -73,6 +73,7 @@ class OrderController extends Controller
                     'price' => $product->price,
                     'total_price' => $product->price * $request->quantity,
                     'status' => 'pending',
+                    'creation_date' => now(),
                 ]);
 
                 return response()->json([

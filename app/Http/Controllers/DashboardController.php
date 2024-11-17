@@ -38,6 +38,17 @@ class DashboardController extends Controller
             $cancelledOrder = Order::where('status', 'cancelled')->count() ?? 0;
         }
 
+        if ($photographer || $user) {
+            $totalOrders = $orders->clone()->where('user_id', Auth::id())->count();
+            $pendingOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'pending')->count();
+            $completedOrders = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->count();
+            $revenue = $orders->clone()->where('user_id', Auth::id())->where('status', 'paid')->sum('total_price');
+
+            $paidOrder = Order::where('user_id', Auth::id())->where('status', 'paid')->count() ?? 0;
+            $unPaidOrder = Order::where('user_id', Auth::id())->where('status', 'partial_paid')->count() ?? 0;
+            $cancelledOrder = Order::where('user_id', Auth::id())->where('status', 'cancelled')->count() ?? 0;
+        }
+
         $data = [
             'totalOrders' => $totalOrders ?? 0,
             'pendingOrders' => $pendingOrders ?? 0,

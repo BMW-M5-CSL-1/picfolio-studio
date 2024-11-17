@@ -123,197 +123,31 @@
         </div>
         <!--/ Revenue Generated -->
 
-        <!-- Radial bar Chart -->
-        {{-- <div class="col-md-6 col-12 mb-4">
+        {{-- For Order --}}
+        <div class="col-md-6 col-12 mb-4">
             <div class="card">
-                <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                    <h5 class="card-title mb-0">Overall Statistics</h5>
-                    <div class="dropdown">
-                        <button type="button" class="btn dropdown-toggle p-0" data-bs-toggle="dropdown"
-                            aria-expanded="false"><i class="ti ti-calendar"></i></button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Today</a></li>
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Yesterday</a>
-                            </li>
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7
-                                    Days</a></li>
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30
-                                    Days</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current
-                                    Month</a></li>
-                            <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                                    Month</a></li>
-                        </ul>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Order Statistics</h5>
+                        {{-- <small class="text-muted">Spending on various categories</small> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="radialBarChart"></div>
+                    <div id="donutChartOrder"></div>
                 </div>
             </div>
-        </div> --}}
-        <!-- /Radial bar Chart -->
+        </div>
 
-        {{-- For Order --}}
-        {{-- @canany(['orders.index', 'orders.create', 'orders.edit', 'orders.update', 'orders.store']) --}}
-            <!-- Order Donut Chart -->
-            <div class="col-md-6 col-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="card-title mb-0">Order Statistics</h5>
-                            {{-- <small class="text-muted">Spending on various categories</small> --}}
-                        </div>
-                        {{-- <div class="dropdown d-none d-sm-flex">
-                    <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                        aria-expanded="false"><i class="ti ti-calendar"></i></button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Today</a>
-                        </li>
-                        <li><a href="javascript:void(0);"
-                                class="dropdown-item d-flex align-items-center">Yesterday</a></li>
-                        <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7
-                                Days</a></li>
-                        <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30
-                                Days</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current
-                                Month</a></li>
-                        <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                                Month</a></li>
-                    </ul>
-                </div> --}}
-                    </div>
-                    <div class="card-body">
-                        <div id="donutChartOrder"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Order Donut Chart -->
-            {{--
-            <!-- Order Payment Tracker -->
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between pb-0">
-                        <div class="card-title mb-0">
-                            <h5 class="mb-0">Payments</h5>
-                            <small class="text-muted">Orders Payment Statistics.</small>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                                <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
-                                    <h1 class="mb-0">{{ $total_orders ?? 0 }}</h1>
-                                    <p class="mb-0">Total Orders</p>
-                                </div>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-                                        <div class="badge rounded bg-label-success p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                                <path
-                                                    d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
-                                                <path d="M12 7v10" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">Paid Orders</h6>
-                                            <small class="text-muted">{{ $paid_orders ?? 0 }}</small>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
-                                        <div class="badge rounded bg-label-warning p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coins"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z" />
-                                                <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4" />
-                                                <path
-                                                    d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z" />
-                                                <path d="M3 6v10c0 .888 .772 1.45 2 2" />
-                                                <path d="M3 11c0 .888 .772 1.45 2 2" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">Partial Paid Orders</h6>
-                                            <small class="text-muted">{{ $partial_paid_orders ?? 0 }}</small>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex gap-3 align-items-center pb-1">
-                                        <div class="badge rounded bg-label-danger p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-coin-off" width="24" height="24"
-                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M14.8 9a2 2 0 0 0 -1.8 -1h-1m-2.82 1.171a2 2 0 0 0 1.82 2.829h1m2.824 2.822a2 2 0 0 1 -1.824 1.178h-2a2 2 0 0 1 -1.8 -1" />
-                                                <path
-                                                    d="M20.042 16.045a9 9 0 0 0 -12.087 -12.087m-2.318 1.677a9 9 0 1 0 12.725 12.73" />
-                                                <path d="M12 6v2m0 8v2" />
-                                                <path d="M3 3l18 18" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">Un Paid Orders</h6>
-                                            <small class="text-muted">{{ $un_paid_orders ?? 0 }}</small>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-8 col-md-12 col-lg-8">
-                                <div id="orderPaymentTracker"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--/ Order Payment Tracker --> --}}
-        {{-- @endcanany --}}
-
-        {{-- For Printing --}}
+        {{-- For Event --}}
         @canany(['printing-press.index', 'printing-press.ajax-paid-order', 'printing-press.ajax-partial-paid-order'])
             <!-- Printing Donut Chart -->
             <div class="col-md-6 col-12 mb-4">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <div>
-                            <h5 class="card-title mb-0">Printing Press Statistics</h5>
+                            <h5 class="card-title mb-0">Event Statistics</h5>
                             {{-- <small class="text-muted">Spending on various categories</small> --}}
                         </div>
-                        {{-- <div class="dropdown d-none d-sm-flex">
-                <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                    aria-expanded="false"><i class="ti ti-calendar"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Today</a>
-                    </li>
-                    <li><a href="javascript:void(0);"
-                            class="dropdown-item d-flex align-items-center">Yesterday</a></li>
-                    <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7
-                            Days</a></li>
-                    <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30
-                            Days</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current
-                            Month</a></li>
-                    <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                            Month</a></li>
-                </ul>
-            </div> --}}
                     </div>
                     <div class="card-body">
                         <div id="donutChartPrinting"></div>

@@ -42,12 +42,11 @@ class OrderDataTable extends DataTable
             ->editColumn('total_price', function ($order) {
                 return number_format($order->total_price) . ' Rs./-';
             })
+            ->editColumn('created_at', function ($order) {
+                return Carbon::parse($order->created_at)->toDayDateTimeString() ?? '-';
+            })
             ->editColumn('user_id', function ($order) {
-                if (isset($order->user_id)) {
-                    return Carbon::parse($order->user_id)->toDayDateTimeString() ?? '-';
-                } else {
-                    return '-';
-                }
+                return $order->user->name ?? '-';
             })
             ->editColumn('status', function ($order) {
                 if (!is_null($order->status)) {
@@ -182,8 +181,8 @@ class OrderDataTable extends DataTable
             Column::make('price')->title('Amount')->addClass('text-nowrap')->orderable(true)->searchable(true),
             Column::make('quantity')->title('quantity')->addClass('text-nowrap')->orderable(true)->searchable(true),
             Column::make('total_price')->title('Total Amount')->addClass('text-nowrap')->orderable(true)->searchable(true),
-            Column::computed('user_id')->title('created at')->addClass('text-nowrap')->orderable(true),
-            // Column::computed('completed_at')->title('completed at')->addClass('text-nowrap')->orderable(true),
+            Column::computed('user_id')->title('User')->addClass('text-nowrap')->orderable(true),
+            Column::make('created_at')->title('created at')->addClass('text-nowrap')->orderable(true),
             Column::computed('action')->title('Actions')->addClass('text-nowrap')->orderable(false)->searchable(false),
             // Column::make('updated_at'),
         ];
