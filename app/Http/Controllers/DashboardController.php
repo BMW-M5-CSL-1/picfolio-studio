@@ -57,7 +57,7 @@ class DashboardController extends Controller
             $cancelledEvents = $events->clone()->where('user_id', Auth::id())->where('status', 'cancelled')->count();
 
             $assignedEvents = $events->clone()->whereHas('eventPhotographers', function ($query) {
-                $query->where('photographer_id', Auth::id());
+                $query->where('photographer_id', Auth::id())->where('status', 'hired');
             });
 
             $totalEvents = $assignedEvents->clone()->count();
