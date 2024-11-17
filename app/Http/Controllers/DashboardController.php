@@ -39,13 +39,13 @@ class DashboardController extends Controller
         }
 
         $data = [
-            'totalOrders' => $totalOrders,
-            'pendingOrders' => $pendingOrders,
-            'completedOrders' => $completedOrders,
-            'revenue' => $revenue,
-            'paidOrder' => $paidOrder,
-            'unPaidOrder' => $unPaidOrder,
-            'cancelledOrder' => $cancelledOrder
+            'totalOrders' => $totalOrders ?? 0,
+            'pendingOrders' => $pendingOrders ?? 0,
+            'completedOrders' => $completedOrders ?? 0,
+            'revenue' => $revenue ?? 0,
+            'paidOrder' => $paidOrder ?? 0,
+            'unPaidOrder' => $unPaidOrder ?? 0,
+            'cancelledOrder' => $cancelledOrder ?? 0,
         ];
         // dd($data['orders_graph']);
         return view('app.dashboard.dashboards', $data);
